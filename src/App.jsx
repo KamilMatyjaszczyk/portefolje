@@ -1,13 +1,21 @@
 import  React from 'react'
-import './App.css'
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import ThreeScene from "./main.jsx";
+import Navbar from "./components/Navbar.jsx";
 
-function App() {
+const App= ()=> {
     return (
-        <div>
-            <h1>Three.js med React</h1>
-            <ThreeScene /> {/* Render ThreeScene */}
-        </div>
-    );
+        <main className="bg-slate-300/20">
+            <Router>
+                <Navbar/>
+                <Routes>
+            <Route path="/" element={'Home'} />
+            <Route path="/about" element={'About'} />
+            <Route path="/projects" element={'Projects'} />
+            <Route path="/contact" element={'Contact'} />
+            </Routes>
+        </Router>
+        </main>
+    )
 }
 export default App;
