@@ -44,7 +44,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>  {
         e.preventDefault();
 
 
-        if(!isRotating) {
+        if(isRotating) {
             const clientX = e.touches ?
                 e.touches[0].clientX
                 : e.clientX;
