@@ -9,7 +9,7 @@ const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [isLoading, setIsLoading] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState('idle')
+    const [currentAnimation, setCurrentAnimation] = useState('Armature|mixamo.com|Layer0')
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });

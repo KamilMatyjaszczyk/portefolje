@@ -8,7 +8,7 @@ Title: Fox
 
 import React, { useRef, useEffect } from 'react'
 import {useAnimations, useGLTF} from '@react-three/drei'
-import FoxScene from '../assets/fox.glb'
+import FoxScene from '../assets/prayingmonkey.glb'
 
 
 const Fox = ({currentAnimation, ...props}) => {
@@ -16,6 +16,7 @@ const Fox = ({currentAnimation, ...props}) => {
     const { nodes, materials, animations } = useGLTF(FoxScene)
     const { actions } = useAnimations(animations, group)
     useEffect(() => {
+        console.log(actions)
         Object.values(actions).forEach((action) => action.stop());
         if (actions [currentAnimation]) {
             actions[currentAnimation].play();
@@ -26,42 +27,148 @@ const Fox = ({currentAnimation, ...props}) => {
 
     return (
         <group ref={group} {...props} dispose={null}>
-            <group name="Sketchfab_Scene">
-                <primitive object={nodes.GLTF_created_0_rootJoint} />
-                <skinnedMesh
-                    name="Object_7"
-                    geometry={nodes.Object_7.geometry}
-                    material={materials.PaletteMaterial001}
-                    skeleton={nodes.Object_7.skeleton}
-                />
-                <skinnedMesh
-                    name="Object_8"
-                    geometry={nodes.Object_8.geometry}
-                    material={materials.PaletteMaterial001}
-                    skeleton={nodes.Object_8.skeleton}
-                />
-                <skinnedMesh
-                    name="Object_9"
-                    geometry={nodes.Object_9.geometry}
-                    material={materials.PaletteMaterial001}
-                    skeleton={nodes.Object_9.skeleton}
-                />
-                <skinnedMesh
-                    name="Object_10"
-                    geometry={nodes.Object_10.geometry}
-                    material={materials.PaletteMaterial001}
-                    skeleton={nodes.Object_10.skeleton}
-                />
-                <skinnedMesh
-                    name="Object_11"
-                    geometry={nodes.Object_11.geometry}
-                    material={materials.PaletteMaterial001}
-                    skeleton={nodes.Object_11.skeleton}
-                />
+            <group name="Scene">
+                <group
+                    name="MONKEY_T_1"
+                    position={[-1.057, 0.002, -1.923]}
+                    rotation={[Math.PI / 2, 0, 0]}
+                    scale={0.01}>
+                    <group name="BODY" position={[0, -14.499, -14.702]}>
+                        <group
+                            name="BRACCIOdx"
+                            position={[-50.671, 5.956, -58.778]}
+                            rotation={[0.228, -0.063, 3.019]}
+                        />
+                        <group name="BRACCIOSX" position={[49.303, 17.577, -52.838]} />
+                        <group name="GAMBADX_1" position={[37.673, 14.499, 64.946]} />
+                        <group name="GAMBASX" position={[-37.631, 2.779, 65.264]} />
+                        <group name="MASK" position={[0.377, 47.225, -133.624]} rotation={[-0.271, 0, 0]} />
+                        <group name="ORECCHIE" position={[0, 14.499, 14.702]}>
+                            <group name="DX" position={[-46.463, 0, -126.732]} />
+                            <group name="SX" position={[45.289, 0, -126.547]} />
+                        </group>
+                    </group>
+                </group>
+                <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+                    <skinnedMesh
+                        name="BOCCASOTTO_1"
+                        geometry={nodes.BOCCASOTTO_1.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.BOCCASOTTO_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="BODY_1"
+                        geometry={nodes.BODY_1.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.BODY_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="BRACCIOSX_1"
+                        geometry={nodes.BRACCIOSX_1.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.BRACCIOSX_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="BRACCIOSX_1_2"
+                        geometry={nodes.BRACCIOSX_1_2.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.BRACCIOSX_1_2.skeleton}
+                    />
+                    <skinnedMesh
+                        name="coda_1"
+                        geometry={nodes.coda_1.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.coda_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="MANODX_1"
+                        geometry={nodes.MANODX_1.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.MANODX_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="MANOsX_1"
+                        geometry={nodes.MANOsX_1.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.MANOsX_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="mask_1"
+                        geometry={nodes.mask_1.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.mask_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="NASO_1"
+                        geometry={nodes.NASO_1.geometry}
+                        material={materials.PELC2}
+                        skeleton={nodes.NASO_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="OCCHI_1"
+                        geometry={nodes.OCCHI_1.geometry}
+                        material={materials.OCCHI}
+                        skeleton={nodes.OCCHI_1.skeleton}
+                    />
+                    <group name="orecchie_1">
+                        <skinnedMesh
+                            name="Mesh013"
+                            geometry={nodes.Mesh013.geometry}
+                            material={materials.PELC}
+                            skeleton={nodes.Mesh013.skeleton}
+                        />
+                        <skinnedMesh
+                            name="Mesh013_1"
+                            geometry={nodes.Mesh013_1.geometry}
+                            material={materials.PELC2}
+                            skeleton={nodes.Mesh013_1.skeleton}
+                        />
+                    </group>
+                    <group name="orecchie_1_2">
+                        <skinnedMesh
+                            name="Mesh014"
+                            geometry={nodes.Mesh014.geometry}
+                            material={materials.PELC}
+                            skeleton={nodes.Mesh014.skeleton}
+                        />
+                        <skinnedMesh
+                            name="Mesh014_1"
+                            geometry={nodes.Mesh014_1.geometry}
+                            material={materials.PELC2}
+                            skeleton={nodes.Mesh014_1.skeleton}
+                        />
+                    </group>
+                    <skinnedMesh
+                        name="PIEDEDX_1"
+                        geometry={nodes.PIEDEDX_1.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.PIEDEDX_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="PIEDEDX_1_2"
+                        geometry={nodes.PIEDEDX_1_2.geometry}
+                        material={materials.PELC}
+                        skeleton={nodes.PIEDEDX_1_2.skeleton}
+                    />
+                    <skinnedMesh
+                        name="Superficie_di_Suddivisione_1"
+                        geometry={nodes.Superficie_di_Suddivisione_1.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.Superficie_di_Suddivisione_1.skeleton}
+                    />
+                    <skinnedMesh
+                        name="Superficie_di_Suddivisione_1_2"
+                        geometry={nodes.Superficie_di_Suddivisione_1_2.geometry}
+                        material={materials.PELLEBASE}
+                        skeleton={nodes.Superficie_di_Suddivisione_1_2.skeleton}
+                    />
+                    <primitive object={nodes.mixamorigHips} />
+                </group>
             </group>
         </group>
     )
 }
+
 
 
 export default Fox;
