@@ -1,0 +1,226 @@
+#root,
+.portfolio-shell {
+  width: 100%;
+  height: 100dvh;
+}
+
+.portfolio-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  background:
+    radial-gradient(circle at 52% 5%, rgba(243, 196, 104, 0.24), transparent 27%),
+    linear-gradient(180deg, #37573d 0%, #1d4031 38%, #112e25 72%, #0b201b 100%);
+}
+
+.portfolio-shell.is-dragging {
+  cursor: grabbing;
+}
+
+.portfolio-shell button,
+.portfolio-shell a,
+.content-panel {
+  user-select: text;
+}
+
+.jungle-atmosphere,
+.canvas-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.jungle-atmosphere {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.jungle-atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.19;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.sun-haze {
+  position: absolute;
+  top: -9rem;
+  left: 50%;
+  width: min(70vw, 58rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 218, 137, 0.22), transparent 63%);
+  filter: blur(10px);
+}
+
+.canopy-shadow {
+  position: absolute;
+  top: -7rem;
+  width: 38rem;
+  height: 25rem;
+  opacity: 0.48;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 25% 50%, #0a2018 0 18%, transparent 19%),
+    radial-gradient(ellipse at 55% 30%, #0a2018 0 22%, transparent 23%),
+    radial-gradient(ellipse at 80% 65%, #0a2018 0 20%, transparent 21%);
+  filter: blur(2px);
+}
+
+.canopy-shadow-left {
+  left: -13rem;
+  transform: rotate(16deg);
+}
+
+.canopy-shadow-right {
+  right: -13rem;
+  transform: scaleX(-1) rotate(16deg);
+}
+
+.canvas-wrap {
+  z-index: 2;
+}
+
+.site-header {
+  position: absolute;
+  z-index: 7;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.7rem 3rem;
+  pointer-events: none;
+}
+
+.brand,
+.status-pill {
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(237, 232, 189, 0.42);
+  border-radius: 50%;
+  color: #f2dfaa;
+  font: 500 0.72rem 'DM Mono', monospace;
+}
+
+.brand-copy {
+  display: grid;
+  line-height: 1.05;
+}
+
+.brand-copy strong {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-copy small {
+  margin-top: 0.3rem;
+  color: rgba(235, 239, 208, 0.54);
+  font-size: 0.62rem;
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(230, 236, 195, 0.17);
+  border-radius: 2rem;
+  color: rgba(239, 240, 211, 0.68);
+  background: rgba(13, 39, 29, 0.34);
+  backdrop-filter: blur(12px);
+  font: 400 0.62rem 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status-pill span {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #a8db72;
+  box-shadow: 0 0 0.7rem #9fd76b;
+}
+
+.hero {
+  position: absolute;
+  z-index: 1;
+  top: 16%;
+  left: 50%;
+  width: min(48rem, 84vw);
+  transform: translate(-50%, -6.5rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.eyebrow,
+.panel-eyebrow {
+  margin: 0 0 1rem;
+  color: #c4b873;
+  font: 400 0.64rem 'DM Mono', monospace;
+  letter-spacing: 0.22em;
+}
+
+.hero .eyebrow {
+  transform: translateY(0.8rem);
+}
+
+.hero h1 {
+  margin: 0;
+  color: #f3f0d8;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.2rem, 4.7vw, 4.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.hero h1 span {
+  display: block;
+  margin-top: 0.12em;
+  color: rgba(231, 229, 194, 0.42);
+  font-style: italic;
+}
+
+.hero-copy {
+  width: min(46rem, 96vw);
+  margin: 0.75rem auto 0;
+  color: rgba(235, 239, 210, 0.58);
+  font-size: clamp(0.76rem, 1.2vw, 0.9rem);
+  line-height: 1.7;
+}
+
+.character-label {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 15%;
+  margin: 0;
+  transform: translateX(-50%);
+  color: rgba(235, 236, 203, 0.38);
+  font: 400 0.57rem 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}

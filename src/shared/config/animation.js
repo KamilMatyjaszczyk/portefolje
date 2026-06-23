@@ -1,0 +1,2 @@
+export const SWING_DURATION_SECONDS = 1.8
+export const IDLE_EASTER_EGG_DELAY_MS = 15000

@@ -1,0 +1,109 @@
+@media (max-width: 700px) {
+  .site-header {
+    padding: 1.2rem;
+  }
+
+  .status-pill {
+    max-width: 2.25rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .hero {
+    top: 14%;
+    width: 92vw;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.35rem, 11vw, 3.6rem);
+  }
+
+  .hero-copy {
+    max-width: 20rem;
+  }
+
+  .character-label {
+    display: none;
+  }
+
+  .edge-zone {
+    top: auto;
+    bottom: 5.7rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    color: transparent;
+    background: transparent;
+  }
+
+  .edge-zone-left,
+  .edge-zone-right {
+    padding: 0;
+  }
+
+  .edge-zone-left {
+    left: 0.75rem;
+  }
+
+  .edge-zone-right {
+    right: 0.75rem;
+  }
+
+  .edge-zone span {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+
+  .fallback-nav {
+    right: 0.8rem;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    justify-content: stretch;
+    border-radius: 1.2rem;
+  }
+
+  .fallback-nav button {
+    flex: 1;
+    justify-content: center;
+    padding: 0.8rem 0.3rem;
+    font-size: 0.6rem;
+  }
+
+  .fallback-nav span {
+    display: none;
+  }
+
+  .content-panel {
+    padding: 3.5rem 1.4rem 1.8rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-detail-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .project-demo {
+    min-height: 10rem;
+  }
+
+  .skills-list div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .contact-links a {
+    grid-template-columns: 5rem 1fr auto;
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

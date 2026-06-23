@@ -1,0 +1,305 @@
+.panel-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(4, 17, 12, 0.48);
+  backdrop-filter: blur(0);
+  transition: opacity 320ms ease, backdrop-filter 320ms ease, visibility 320ms;
+}
+
+.panel-backdrop.is-open {
+  visibility: visible;
+  opacity: 1;
+  backdrop-filter: blur(12px);
+}
+
+.content-panel {
+  position: relative;
+  width: min(54rem, 94vw);
+  max-height: min(50rem, 88vh);
+  overflow-y: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(185, 151, 73, 0.13), transparent 35%),
+    linear-gradient(145deg, rgba(31, 72, 48, 0.97), rgba(12, 42, 31, 0.99));
+  box-shadow: 0 2rem 7rem rgba(0, 12, 7, 0.52);
+  transform: translateY(1rem) scale(0.98);
+  transition: transform var(--transition-panel);
+}
+
+.is-open .content-panel {
+  transform: translateY(0) scale(1);
+}
+
+.panel-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid rgba(232, 232, 196, 0.18);
+  border-radius: 50%;
+  background: rgba(6, 29, 20, 0.32);
+  cursor: pointer;
+}
+
+.panel-close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.9rem;
+  height: 1px;
+  background: #f0efd0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.panel-close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.content-panel h2 {
+  max-width: 34rem;
+  margin: 0;
+  color: #f4f1d6;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.panel-intro {
+  max-width: 35rem;
+  margin: 1.2rem 0 2.5rem;
+  color: rgba(235, 238, 205, 0.6);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.panel-body {
+  color: rgba(239, 240, 211, 0.74);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+}
+
+.profile-meta span {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(229, 229, 187, 0.14);
+  border-radius: 2rem;
+  font: 400 0.6rem 'DM Mono', monospace;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  animation: project-content-in 300ms ease both;
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 12rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(227, 226, 184, 0.14);
+  border-radius: 1rem;
+  color: inherit;
+  background: rgba(224, 214, 164, 0.045);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  border-color: rgba(211, 183, 96, 0.38);
+  background: rgba(224, 214, 164, 0.085);
+  transform: translateY(-0.2rem);
+  outline: none;
+}
+
+.project-card > span,
+.project-grid small,
+.skills-list span,
+.contact-links span {
+  color: var(--color-accent);
+  font: 400 0.55rem 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-grid h3 {
+  margin: 2rem 0 0.5rem;
+  color: #f2f0d5;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.project-grid p {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.project-card small {
+  margin-top: auto;
+}
+
+.project-card b {
+  margin-top: 0.9rem;
+  color: rgba(242, 240, 213, 0.72);
+  font-size: 0.62rem;
+  font-weight: 500;
+}
+
+.project-back {
+  margin: 0 0 2.2rem;
+  padding: 0;
+  border: 0;
+  color: var(--color-accent);
+  background: transparent;
+  font: 400 0.58rem 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.project-back:hover {
+  color: #f2e2a8;
+}
+
+.project-demo {
+  min-height: 13rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(227, 226, 184, 0.14);
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at 75% 15%, rgba(202, 177, 92, 0.14), transparent 35%),
+    rgba(5, 29, 19, 0.36);
+}
+
+.project-demo span,
+.project-detail-copy span {
+  color: var(--color-accent);
+  font: 400 0.55rem 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-demo strong {
+  display: block;
+  margin: 3rem 0 0.45rem;
+  color: #f2f0d5;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.project-demo p {
+  max-width: 28rem;
+  margin: 0;
+  color: rgba(239, 240, 211, 0.58);
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+.project-detail-copy {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+
+.project-detail-copy > div {
+  padding: 1.2rem;
+  border-top: 1px solid rgba(227, 226, 184, 0.14);
+}
+
+.project-detail-copy p {
+  margin: 0.8rem 0 0;
+}
+
+.project-detail-copy ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-detail-copy li {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(227, 226, 184, 0.13);
+  border-radius: 2rem;
+  font-size: 0.62rem;
+}
+
+.project-detail {
+  animation: project-content-in 340ms
+    cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes project-content-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.skills-list {
+  border-top: 1px solid rgba(227, 226, 184, 0.14);
+}
+
+.skills-list div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(227, 226, 184, 0.14);
+}
+
+.skills-list p {
+  margin: 0;
+}
+
+.contact-links {
+  display: grid;
+}
+
+.contact-links a {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(227, 226, 184, 0.14);
+  color: #f0efd4;
+  text-decoration: none;
+}
+
+.contact-links b {
+  color: #d1b866;
+  font-size: 1rem;
+  font-weight: 300;
+}
