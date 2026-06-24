@@ -88,6 +88,22 @@
     min-height: 10rem;
   }
 
+  .architecture-heading {
+    display: block;
+  }
+
+  .architecture-heading p {
+    margin-top: 0.4rem;
+  }
+
+  .architecture-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-lightbox {
+    padding: 1rem;
+  }
+
   .skills-list div {
     grid-template-columns: 1fr;
     gap: 0.25rem;

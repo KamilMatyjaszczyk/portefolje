@@ -220,6 +220,20 @@
   line-height: 1.7;
 }
 
+.project-demo--current {
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.project-demo--current strong {
+  margin-top: 0;
+}
+
+.project-demo--current p {
+  margin-inline: auto;
+}
+
 .project-detail-copy {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -302,4 +316,129 @@
   color: #d1b866;
   font-size: 1rem;
   font-weight: 300;
+}
+
+.project-demo--video {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(3, 15, 10, 0.7);
+}
+
+.project-demo--video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.project-demo--architecture {
+  min-height: 0;
+}
+
+.architecture-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.architecture-heading p {
+  font-size: 0.66rem;
+}
+
+.architecture-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.architecture-grid button {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(227, 226, 184, 0.14);
+  border-radius: 0.8rem;
+  color: #f2f0d5;
+  background: rgba(3, 15, 10, 0.42);
+  text-align: left;
+  cursor: zoom-in;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.architecture-grid button:hover {
+  border-color: rgba(211, 183, 96, 0.42);
+  transform: translateY(-0.12rem);
+}
+
+.architecture-grid img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: contain;
+  background: rgba(244, 242, 224, 0.94);
+}
+
+.architecture-grid strong {
+  display: block;
+  margin: 0;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.architecture-lightbox {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgba(2, 12, 8, 0.86);
+  backdrop-filter: blur(14px);
+}
+
+.architecture-lightbox > button {
+  position: fixed;
+  z-index: 1;
+  top: 1.2rem;
+  right: 1.4rem;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid rgba(232, 232, 196, 0.22);
+  border-radius: 50%;
+  color: #f0efd0;
+  background: rgba(6, 29, 20, 0.72);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.architecture-lightbox figure {
+  max-width: min(78rem, 94vw);
+  max-height: 90vh;
+  margin: 0;
+}
+
+.architecture-lightbox img {
+  max-width: 100%;
+  max-height: 82vh;
+  display: block;
+  object-fit: contain;
+  border-radius: 0.8rem;
+  background: #f4f2e0;
+}
+
+.architecture-lightbox figcaption {
+  margin-top: 0.8rem;
+  color: rgba(242, 240, 213, 0.72);
+  text-align: center;
+  font-size: 0.72rem;
+}
+
+.project-link {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: var(--color-accent);
+  text-decoration: none;
 }
