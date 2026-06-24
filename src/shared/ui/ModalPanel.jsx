@@ -1,9 +1,13 @@
+import { useLanguage } from '../i18n/useLanguage'
+
 function ModalPanel({
   isOpen,
   isDetail = false,
   onClose,
   children,
 }) {
+  const { t } = useLanguage()
+
   return (
     <div
       className={`panel-backdrop ${isOpen ? 'is-open' : ''}`}
@@ -23,7 +27,7 @@ function ModalPanel({
             className="panel-close"
             type="button"
             onClick={onClose}
-            aria-label="Lukk panel"
+            aria-label={t('closePanel')}
           >
             <span />
             <span />

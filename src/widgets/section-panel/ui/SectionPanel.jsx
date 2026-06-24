@@ -2,18 +2,20 @@ import { useEffect } from 'react'
 import ProjectDetail from '../../../entities/project/ui/ProjectDetail'
 import ProjectGrid from '../../../entities/project/ui/ProjectGrid'
 import { useProjectRoute } from '../../../features/project-routing/model/useProjectRoute'
+import { useLanguage } from '../../../shared/i18n/useLanguage'
 import ModalPanel from '../../../shared/ui/ModalPanel'
-import { sectionContent } from '../model/sectionContent'
+import { getSectionContent } from '../model/sectionContent'
 
 function SectionPanel({ activeSection, onClose }) {
+  const { language } = useLanguage()
   const {
     activeProject,
     isProjectRouteOpen,
     openProject,
     showProjectList,
     closeProjectRoute,
-  } = useProjectRoute()
-  const content = sectionContent[activeSection]
+  } = useProjectRoute(language)
+  const content = getSectionContent(language)[activeSection]
   const isProjectList =
     activeSection === 'projects' ||
     (isProjectRouteOpen && !activeProject)

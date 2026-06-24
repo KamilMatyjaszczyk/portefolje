@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
+import { useLanguage } from '../../../shared/i18n/useLanguage'
 
 function ProjectDetail({ project, onBack }) {
+  const { t } = useLanguage()
   const [videoFailed, setVideoFailed] = useState(false)
   const [selectedImage, setSelectedImage] = useState(null)
   const showVideo = Boolean(project.videoUrl) && !videoFailed
-  const showArchitecture =
-    !showVideo && Boolean(project.architectureImages?.length)
+  const galleryImages =
+    project.architectureImages ?? project.resultImages
+  const showGallery = !showVideo && Boolean(galleryImages?.length)
 
   useEffect(() => {
     setVideoFailed(false)
@@ -15,7 +18,7 @@ function ProjectDetail({ project, onBack }) {
   return (
     <div className="project-detail">
       <button className="project-back" type="button" onClick={onBack}>
-        ← Tilbake til prosjekter
+        ← {t('backToProjects')}
       </button>
       <p className="panel-eyebrow">
         {project.number} / {project.category}
@@ -31,16 +34,18 @@ function ProjectDetail({ project, onBack }) {
             loop
             playsInline
             preload="metadata"
-            aria-label={`Video-preview av ${project.title}`}
+            aria-label={`${t('videoPreview')} ${project.title}`}
             onError={() => setVideoFailed(true)}
           >
             <source src={project.videoUrl} type="video/webm" />
-            Nettleseren din støtter ikke videoavspilling.
+            {t('videoUnsupported')}
           </video>
         </div>
-      ) : showArchitecture ? (
-        <ArchitectureGallery
-          images={project.architectureImages}
+      ) : showGallery ? (
+        <ProjectImageGallery
+          images={galleryImages}
+          title={project.galleryTitle}
+          description={project.galleryDescription}
           onSelect={setSelectedImage}
         />
       ) : (
@@ -52,7 +57,7 @@ function ProjectDetail({ project, onBack }) {
 
       <div className="project-detail-copy">
         <div>
-          <span>Om prosjektet</span>
+          <span>{t('aboutProject')}</span>
           <p>{project.description}</p>
           {project.githubUrl && (
             <a
@@ -61,12 +66,12 @@ function ProjectDetail({ project, onBack }) {
               target="_blank"
               rel="noreferrer"
             >
-              Se kode på GitHub →
+              {t('viewCode')} →
             </a>
           )}
         </div>
         <div>
-          <span>Teknologi</span>
+          <span>{t('technology')}</span>
           <ul>
             {project.technologies.map((technology) => (
               <li key={technology}>{technology}</li>
@@ -85,12 +90,19 @@ function ProjectDetail({ project, onBack }) {
   )
 }
 
-function ArchitectureGallery({ images, onSelect }) {
+function ProjectImageGallery({
+  images,
+  title,
+  description,
+  onSelect,
+}) {
+  const { t } = useLanguage()
+
   return (
     <div className="project-demo project-demo--architecture">
       <div className="architecture-heading">
-        <span>ARKITEKTUR</span>
-        <p>Klikk på et diagram for å se det større.</p>
+        <span>{title ?? t('galleryDefaultTitle')}</span>
+        <p>{description ?? t('galleryDefaultDescription')}</p>
       </div>
       <div className="architecture-grid">
         {images.map((image) => (
@@ -109,6 +121,8 @@ function ArchitectureGallery({ images, onSelect }) {
 }
 
 function ImageLightbox({ image, onClose }) {
+  const { t } = useLanguage()
+
   return (
     <div
       className="architecture-lightbox"
@@ -119,7 +133,7 @@ function ImageLightbox({ image, onClose }) {
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <button type="button" onClick={onClose} aria-label="Lukk bilde">
+      <button type="button" onClick={onClose} aria-label={t('closeImage')}>
         ×
       </button>
       <figure>
@@ -131,7 +145,10 @@ function ImageLightbox({ image, onClose }) {
 }
 
 function ProjectDemoPlaceholder({ project, videoFailed }) {
-  const isCurrentProject = project.status === 'Du ser den nå'
+  const { t } = useLanguage()
+  const isCurrentProject = project.slug === 'jungel-portfolio'
+  const isCompletedProject = project.stage === 'completed'
+  const isOngoingProject = project.stage === 'ongoing'
 
   return (
     <div
@@ -140,25 +157,33 @@ function ProjectDemoPlaceholder({ project, videoFailed }) {
       }`}
     >
       {(videoFailed || !isCurrentProject) && (
-        <span>{videoFailed ? 'Video utilgjengelig' : project.status}</span>
+        <span>{videoFailed ? t('videoUnavailable') : project.status}</span>
       )}
       <strong>
         {videoFailed
-          ? 'Demo kommer'
+          ? t('demoComing')
           : isCurrentProject
-            ? 'Du ser den nå'
+            ? t('currentProject')
+          : isCompletedProject
+            ? t('completedProject')
+          : isOngoingProject
+            ? t('ongoingProject')
           : project.demo
-            ? 'Interaktiv demo'
-            : 'Prosjektoversikt'}
+            ? t('interactiveDemo')
+            : t('projectOverview')}
       </strong>
       <p>
         {videoFailed
-          ? 'Video-previewen kunne ikke lastes inn. Prosjektinformasjonen er fortsatt tilgjengelig nedenfor.'
+          ? t('videoFailed')
           : isCurrentProject
-            ? 'Denne porteføljen er selve demoen.'
+            ? t('currentProjectDescription')
+          : isCompletedProject
+            ? t('completedDescription')
+          : isOngoingProject
+            ? t('ongoingDescription')
           : project.demo
-            ? 'Dette området er klart for en innebygd demo når prosjektet kobles til.'
-            : 'Dette prosjektet presenteres som et teknisk case uten en offentlig demo.'}
+            ? t('demoDescription')
+            : t('caseDescription')}
       </p>
     </div>
   )

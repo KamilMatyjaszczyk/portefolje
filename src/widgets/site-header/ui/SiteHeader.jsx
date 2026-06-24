@@ -1,16 +1,40 @@
-function SiteHeader() {
+import { useLanguage } from '../../../shared/i18n/useLanguage'
+
+function SiteHeader({ onOpenAbout }) {
+  const { language, toggleLanguage, t } = useLanguage()
+
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="Gå til toppen">
+      <button
+        className="brand"
+        type="button"
+        onClick={onOpenAbout}
+        aria-label={
+          language === 'no' ? 'Åpne Om meg' : 'Open About me'
+        }
+      >
         <span className="brand-mark">KM</span>
         <span className="brand-copy">
           <strong>Kamil Matyjaszczyk</strong>
-          <small>Software developer</small>
+          <small>{t('role')}</small>
         </span>
-      </a>
-      <div className="status-pill">
-        <span />
-        Tilgjengelig for nye muligheter
+      </button>
+      <div className="header-actions">
+        <div className="status-pill">
+          <span />
+          {t('availability')}
+        </div>
+        <button
+          className="language-toggle"
+          type="button"
+          onClick={toggleLanguage}
+          aria-label={t('switchLanguage')}
+          title={t('switchLanguage')}
+        >
+          <span className={language === 'no' ? 'is-active' : ''}>NO</span>
+          <i>/</i>
+          <span className={language === 'en' ? 'is-active' : ''}>EN</span>
+        </button>
       </div>
     </header>
   )

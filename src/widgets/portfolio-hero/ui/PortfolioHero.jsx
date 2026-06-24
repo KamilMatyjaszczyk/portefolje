@@ -1,14 +1,16 @@
+import { useLanguage } from '../../../shared/i18n/useLanguage'
+
 function PortfolioHero() {
+  const { t } = useLanguage()
+
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
-      <p className="eyebrow">PORTFOLIO / 2026</p>
+      <p className="eyebrow">{t('heroEyebrow')}</p>
       <h1 id="hero-title">
-        Jeg bygger ting...
-        <span>Noen ganger litt annerledes</span>
+        {t('heroTitle')}
+        <span>{t('heroTitleAccent')}</span>
       </h1>
-      <p className="hero-copy">
-        Sving deg gjennom arbeid, ferdigheter og kontakt.
-      </p>
+      <p className="hero-copy">{t('heroCopy')}</p>
     </section>
   )
 }

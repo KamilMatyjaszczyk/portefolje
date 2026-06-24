@@ -1,4 +1,8 @@
+import { useLanguage } from '../../../shared/i18n/useLanguage'
+
 function ProjectCard({ project, onOpen }) {
+  const { t } = useLanguage()
+
   return (
     <button
       className="project-card"
@@ -11,7 +15,7 @@ function ProjectCard({ project, onOpen }) {
       <h3>{project.title}</h3>
       <p>{project.summary}</p>
       <small>{project.technologies.join(' · ')}</small>
-      <b aria-hidden="true">Se prosjekt →</b>
+      <b aria-hidden="true">{t('viewProject')} →</b>
     </button>
   )
 }

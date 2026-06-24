@@ -95,6 +95,115 @@
   margin-top: 1.8rem;
 }
 
+.profile-role {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(211, 183, 96, 0.2);
+  border-radius: 0.9rem;
+  background:
+    linear-gradient(90deg, rgba(211, 183, 96, 0.09), transparent),
+    rgba(4, 24, 16, 0.2);
+}
+
+.profile-role > span {
+  flex: 0 0 auto;
+  padding: 0.42rem 0.58rem;
+  border-radius: 2rem;
+  color: #d1b866;
+  background: rgba(211, 183, 96, 0.1);
+  font: 400 0.52rem 'DM Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.profile-role strong {
+  display: block;
+  color: #f2f0d5;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.profile-role p {
+  margin: 0.18rem 0 0;
+  color: rgba(239, 240, 211, 0.55);
+  font-size: 0.66rem;
+}
+
+.profile-timeline {
+  display: grid;
+  gap: 1.7rem;
+  margin-top: 2rem;
+}
+
+.timeline-section h3 {
+  margin: 0 0 0.65rem;
+  color: #f2f0d5;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timeline-list {
+  border-top: 1px solid rgba(227, 226, 184, 0.18);
+}
+
+.timeline-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(227, 226, 184, 0.12);
+}
+
+.timeline-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.timeline-heading strong {
+  display: block;
+  color: #f2f0d5;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.timeline-heading p,
+.timeline-description {
+  margin: 0.2rem 0 0;
+}
+
+.timeline-heading p {
+  color: rgba(239, 240, 211, 0.57);
+  font-size: 0.68rem;
+}
+
+.timeline-heading time {
+  flex: 0 0 auto;
+  color: rgba(239, 240, 211, 0.5);
+  font: 400 0.58rem 'DM Mono', monospace;
+  white-space: nowrap;
+}
+
+.timeline-heading span {
+  display: inline-block;
+  margin-bottom: 0.32rem;
+  color: #d1b866;
+  font: 400 0.5rem 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timeline-description {
+  max-width: 38rem;
+  color: rgba(239, 240, 211, 0.68);
+  font-size: 0.68rem;
+  line-height: 1.65;
+  font-style: italic;
+}
+
 .profile-meta span {
   padding: 0.55rem 0.8rem;
   border: 1px solid rgba(229, 229, 187, 0.14);
@@ -370,6 +479,10 @@
 .architecture-grid button:hover {
   border-color: rgba(211, 183, 96, 0.42);
   transform: translateY(-0.12rem);
+}
+
+.architecture-grid button:only-child {
+  grid-column: 1 / -1;
 }
 
 .architecture-grid img {

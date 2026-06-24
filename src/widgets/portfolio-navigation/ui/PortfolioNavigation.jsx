@@ -1,3 +1,5 @@
+import { useLanguage } from '../../../shared/i18n/useLanguage'
+
 function PortfolioNavigation({
   sections,
   activeSection,
@@ -6,6 +8,8 @@ function PortfolioNavigation({
   onOpen,
   onTravel,
 }) {
+  const { t } = useLanguage()
+
   return (
     <>
       <button
@@ -13,27 +17,25 @@ function PortfolioNavigation({
         type="button"
         onClick={() => onTravel(-1)}
         disabled={Boolean(journey)}
-        aria-label="Forrige stopp"
+        aria-label={t('previousStop')}
       >
         <span>←</span>
-        Forrige
+        {t('previous')}
       </button>
       <button
         className="edge-zone edge-zone-right"
         type="button"
         onClick={() => onTravel(1)}
         disabled={Boolean(journey)}
-        aria-label="Neste stopp"
+        aria-label={t('nextStop')}
       >
-        Neste
+        {t('next')}
         <span>→</span>
       </button>
 
-      <p className="character-label">
-        Dra, sveip eller scroll · Sving videre
-      </p>
+      <p className="character-label">{t('interactionHint')}</p>
 
-      <nav className="fallback-nav" aria-label="Portefølje">
+      <nav className="fallback-nav" aria-label={t('portfolioNavigation')}>
         {sections.map((section, index) => (
           <button
             key={section.id}

@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber'
-import { portfolioSections } from '../../entities/section/data/sections.data'
+import { useMemo } from 'react'
+import { getPortfolioSections } from '../../entities/section/data/sections.data'
 import { usePortfolioNavigation } from '../../features/portfolio-navigation/model/usePortfolioNavigation'
+import { useLanguage } from '../../shared/i18n/useLanguage'
 import JungleScene from '../../widgets/jungle-scene/ui/JungleScene'
 import PortfolioNavigation from '../../widgets/portfolio-navigation/ui/PortfolioNavigation'
 import PortfolioHero from '../../widgets/portfolio-hero/ui/PortfolioHero'
@@ -8,6 +10,11 @@ import SectionPanel from '../../widgets/section-panel/ui/SectionPanel'
 import SiteHeader from '../../widgets/site-header/ui/SiteHeader'
 
 function HomePage() {
+  const { language } = useLanguage()
+  const portfolioSections = useMemo(
+    () => getPortfolioSections(language),
+    [language],
+  )
   const navigation = usePortfolioNavigation(portfolioSections.length)
 
   return (
@@ -24,7 +31,7 @@ function HomePage() {
         <div className="canopy-shadow canopy-shadow-right" />
       </div>
 
-      <SiteHeader />
+      <SiteHeader onOpenAbout={() => navigation.openSection('about')} />
       <PortfolioHero />
 
       <div

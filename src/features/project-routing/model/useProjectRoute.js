@@ -3,20 +3,22 @@ import { getProjectBySlug } from '../../../entities/project/data/projects.data'
 
 const PROJECT_PATH_PATTERN = /^\/projects\/([^/]+)\/?$/
 
-function readProjectRoute() {
+function readProjectRoute(language) {
   const match = window.location.pathname.match(PROJECT_PATH_PATTERN)
-  return match ? getProjectBySlug(match[1]) : null
+  return match ? getProjectBySlug(match[1], language) : null
 }
 
-export function useProjectRoute() {
-  const [activeProject, setActiveProject] = useState(readProjectRoute)
+export function useProjectRoute(language) {
+  const [activeProject, setActiveProject] = useState(() =>
+    readProjectRoute(language),
+  )
   const [isProjectRouteOpen, setIsProjectRouteOpen] = useState(() =>
     window.location.pathname.startsWith('/projects'),
   )
 
   useEffect(() => {
     const syncRoute = () => {
-      setActiveProject(readProjectRoute())
+      setActiveProject(readProjectRoute(language))
       setIsProjectRouteOpen(
         window.location.pathname.startsWith('/projects'),
       )
@@ -24,7 +26,11 @@ export function useProjectRoute() {
 
     window.addEventListener('popstate', syncRoute)
     return () => window.removeEventListener('popstate', syncRoute)
-  }, [])
+  }, [language])
+
+  useEffect(() => {
+    setActiveProject(readProjectRoute(language))
+  }, [language])
 
   const openProject = useCallback((project) => {
     window.history.pushState(

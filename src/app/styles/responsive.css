@@ -9,6 +9,14 @@
     white-space: nowrap;
   }
 
+  .header-actions {
+    gap: 0.35rem;
+  }
+
+  .language-toggle {
+    padding: 0.55rem 0.62rem;
+  }
+
   .hero {
     top: 14%;
     width: 92vw;
@@ -102,6 +110,15 @@
 
   .architecture-lightbox {
     padding: 1rem;
+  }
+
+  .timeline-heading {
+    display: block;
+  }
+
+  .timeline-heading time {
+    display: block;
+    margin-top: 0.4rem;
   }
 
   .skills-list div {
