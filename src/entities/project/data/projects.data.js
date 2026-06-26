@@ -1,11 +1,32 @@
-import evacuationPreviewVideo from '../../../videos/evacuation_preview.webm'
-import feedAppArchitecture from '../../../pictures/architecture_feedapp.png'
-import feedAppDeployment from '../../../pictures/deployment_feedapp.png'
-import giftFlaggedImages from '../../../pictures/afterstandardizing_gift.png'
-import giftLogisticRegression from '../../../pictures/conf_logreg_gift.png'
-import giftSvm from '../../../pictures/conf_svm_gift.png'
-import landcoverConfusionMatrices from '../../../pictures/confmatrix_landcover.png'
-import giftDimensionalityReduction from '../../../pictures/reddim_gift.png'
+const loadAsset = (importer) => () =>
+  importer().then((module) => module.default)
+
+const projectAssets = {
+  evacuationPreviewVideo: loadAsset(() =>
+    import('../../../videos/evacuation_preview.webm'),
+  ),
+  feedAppArchitecture: loadAsset(() =>
+    import('../../../pictures/architecture_feedapp.png'),
+  ),
+  feedAppDeployment: loadAsset(() =>
+    import('../../../pictures/deployment_feedapp.png'),
+  ),
+  giftFlaggedImages: loadAsset(() =>
+    import('../../../pictures/afterstandardizing_gift.png'),
+  ),
+  giftLogisticRegression: loadAsset(() =>
+    import('../../../pictures/conf_logreg_gift.png'),
+  ),
+  giftSvm: loadAsset(() =>
+    import('../../../pictures/conf_svm_gift.png'),
+  ),
+  landcoverConfusionMatrices: loadAsset(() =>
+    import('../../../pictures/confmatrix_landcover.png'),
+  ),
+  giftDimensionalityReduction: loadAsset(() =>
+    import('../../../pictures/reddim_gift.png'),
+  ),
+}
 
 export const portfolioProjects = [
   {
@@ -14,12 +35,23 @@ export const portfolioProjects = [
     category: 'EMULATOR',
     title: 'Game Boy Emulator',
     summary:
-      'En emulator som gjenskaper sentrale deler av Game Boy-maskinvaren og kjører spill i nettleseren.',
+      'En nettleserbasert Game Boy-emulator bygget fra bunnen av i JavaScript, med grafikk, lyd, input og lagring.',
     description:
-      'Et teknisk prosjekt med fokus på CPU-instruksjoner, minnehåndtering, grafikk og forståelse av hvordan eldre spillmaskinvare fungerer på lavt nivå.',
-    technologies: ['JavaScript', 'Emulation', 'Canvas'],
+      'Prosjektet emulerer den originale Game Boy-maskinvaren direkte i nettleseren. Jeg har implementert LR35902-prosessorens instruksjonssett, minnekart og bankbytte, grafikkprosessor, timere, interrupts, joypad-input og deler av lydsystemet. Emulatoren støtter ROM-er uten minnekontroller og MBC3-kassetter, og lagrer kompatible spill automatisk i nettleseren. Brukeren kan velge en lokal ROM-fil, spille med tastatur eller skjermkontroller og importere eller eksportere save-filer. Den største utfordringen har vært å få alle komponentene til å arbeide i takt, slik at instruksjoner, grafikk, input og lyd oppfører seg som én sammenhengende maskin.',
+    technologies: [
+      'JavaScript',
+      'Game Boy-emulering',
+      'CPU-arkitektur',
+      'Minnehåndtering',
+      'Grafikkrendering',
+      'Lydemulering',
+      'Browser APIs',
+      'Testing',
+    ],
     demo: true,
-    status: 'Demo kommer',
+    status: 'Spillbar demo',
+    embedPath: 'demos/gameboy/index.html',
+    githubUrl: 'https://github.com/KamilMatyjaszczyk/Emulator',
   },
   {
     slug: 'gama-multiagent-simulation',
@@ -40,7 +72,7 @@ export const portfolioProjects = [
     ],
     demo: false,
     status: 'Video-preview',
-    videoUrl: evacuationPreviewVideo,
+    videoLoader: projectAssets.evacuationPreviewVideo,
     githubUrl: 'https://github.com/KamilMatyjaszczyk/EvacuationMASD',
   },
   {
@@ -66,12 +98,12 @@ export const portfolioProjects = [
     status: 'Case study',
     architectureImages: [
       {
-        src: feedAppArchitecture,
+        loadSrc: projectAssets.feedAppArchitecture,
         title: 'Systemarkitektur',
         alt: 'Arkitekturdiagram for FeedApp og tilhørende tjenester',
       },
       {
-        src: feedAppDeployment,
+        loadSrc: projectAssets.feedAppDeployment,
         title: 'Deployment og infrastruktur',
         alt: 'Deploymentdiagram for FeedApp',
       },
@@ -104,22 +136,22 @@ export const portfolioProjects = [
     galleryDescription: 'Klikk på et resultat for å se det større.',
     resultImages: [
       {
-        src: giftLogisticRegression,
+        loadSrc: projectAssets.giftLogisticRegression,
         title: 'Logistisk regresjon',
         alt: 'Confusion matrix for Gift Recognizer med logistisk regresjon',
       },
       {
-        src: giftSvm,
+        loadSrc: projectAssets.giftSvm,
         title: 'SVM',
         alt: 'Confusion matrix for Gift Recognizer med SVM',
       },
       {
-        src: giftDimensionalityReduction,
+        loadSrc: projectAssets.giftDimensionalityReduction,
         title: 'PCA og dimensjonsreduksjon',
         alt: 'Graf som sammenligner nøyaktighet og treningstid ved dimensjonsreduksjon',
       },
       {
-        src: giftFlaggedImages,
+        loadSrc: projectAssets.giftFlaggedImages,
         title: 'Oppdagelse av avvikende bilder',
         alt: 'Sammenligning av bilder markert som avvik før og etter standardisering',
       },
@@ -154,7 +186,7 @@ export const portfolioProjects = [
       'Confusion matrices for modellene på RGB- og multispektrale data.',
     resultImages: [
       {
-        src: landcoverConfusionMatrices,
+        loadSrc: projectAssets.landcoverConfusionMatrices,
         title: 'Sammenligning av alle modeller',
         alt: 'Confusion matrices for CNN, ResNet, EfficientNet og Swin Transformer på RGB- og multispektrale satellittbilder',
       },
@@ -214,11 +246,20 @@ export const portfolioProjects = [
 const englishProjectContent = {
   'gameboy-emulator': {
     summary:
-      'An emulator that recreates core parts of the Game Boy hardware and runs games in the browser.',
+      'A browser-based Game Boy emulator built from scratch in JavaScript, with graphics, audio, input and save support.',
     description:
-      'A technical project focused on CPU instructions, memory management, graphics and understanding how older gaming hardware works at a low level.',
-    technologies: ['JavaScript', 'Emulation', 'Canvas'],
-    status: 'Demo coming soon',
+      'The project emulates the original Game Boy hardware directly in the browser. I have implemented the LR35902 processor instruction set, memory map and bank switching, graphics processor, timers, interrupts, joypad input and parts of the audio system. The emulator supports ROMs without a memory controller and MBC3 cartridges, and automatically stores compatible game saves in the browser. The user can select a local ROM file, play using a keyboard or on-screen controls, and import or export save files. The main challenge has been getting every component to work in sync, so that instructions, graphics, input and audio behave as one coherent machine.',
+    technologies: [
+      'JavaScript',
+      'Game Boy emulation',
+      'CPU architecture',
+      'Memory management',
+      'Graphics rendering',
+      'Audio emulation',
+      'Browser APIs',
+      'Testing',
+    ],
+    status: 'Playable demo',
   },
   'gama-multiagent-simulation': {
     category: 'MULTI-AGENT SYSTEM',
@@ -246,12 +287,12 @@ const englishProjectContent = {
     status: 'Case study',
     architectureImages: [
       {
-        src: feedAppArchitecture,
+        loadSrc: projectAssets.feedAppArchitecture,
         title: 'System architecture',
         alt: 'Architecture diagram for FeedApp and its related services',
       },
       {
-        src: feedAppDeployment,
+        loadSrc: projectAssets.feedAppDeployment,
         title: 'Deployment and infrastructure',
         alt: 'Deployment diagram for FeedApp',
       },
@@ -278,22 +319,22 @@ const englishProjectContent = {
     galleryDescription: 'Click on a result to see it larger.',
     resultImages: [
       {
-        src: giftLogisticRegression,
+        loadSrc: projectAssets.giftLogisticRegression,
         title: 'Logistic regression',
         alt: 'Confusion matrix for Gift Recognizer using logistic regression',
       },
       {
-        src: giftSvm,
+        loadSrc: projectAssets.giftSvm,
         title: 'SVM',
         alt: 'Confusion matrix for Gift Recognizer using SVM',
       },
       {
-        src: giftDimensionalityReduction,
+        loadSrc: projectAssets.giftDimensionalityReduction,
         title: 'PCA and dimensionality reduction',
         alt: 'Chart comparing accuracy and training time during dimensionality reduction',
       },
       {
-        src: giftFlaggedImages,
+        loadSrc: projectAssets.giftFlaggedImages,
         title: 'Detection of anomalous images',
         alt: 'Comparison of images flagged as anomalies before and after standardisation',
       },
@@ -321,7 +362,7 @@ const englishProjectContent = {
       'Confusion matrices for the models using RGB and multispectral data.',
     resultImages: [
       {
-        src: landcoverConfusionMatrices,
+        loadSrc: projectAssets.landcoverConfusionMatrices,
         title: 'Comparison of all models',
         alt: 'Confusion matrices for CNN, ResNet, EfficientNet and Swin Transformer using RGB and multispectral satellite images',
       },

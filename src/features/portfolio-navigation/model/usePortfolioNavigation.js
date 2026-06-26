@@ -113,9 +113,6 @@ export function usePortfolioNavigation(sectionCount) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        if (/^\/projects\/[^/]+\/?$/.test(window.location.pathname)) {
-          return
-        }
         closeSection()
       } else if (!activeSection && event.key === 'ArrowLeft') {
         travel(-1)

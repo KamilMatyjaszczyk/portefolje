@@ -1,13 +1,15 @@
 export const uiTranslations = {
   no: {
     backToTop: 'Gå til toppen',
-    pageDescription: 'Portefølje som viser mine ferdigheter og prosjekter.',
+    pageTitle: 'Kamil Matyjaszczyk — Software Developer',
+    pageDescription:
+      'Portefølje for Kamil Matyjaszczyk, software developer med prosjekter innen frontend, systemutvikling, maskinlæring og emulering.',
     role: 'Software developer',
     availability: 'Tilgjengelig for nye muligheter',
     switchLanguage: 'Bytt til engelsk',
     heroEyebrow: 'PORTFOLIO / 2026',
-    heroTitle: 'Jeg bygger ting...',
-    heroTitleAccent: 'Noen ganger litt annerledes',
+    heroTitle: 'Jeg skaper løsninger',
+    heroTitleAccent: 'I en jungel av informasjon',
     heroCopy: 'Sving deg gjennom arbeid, ferdigheter og kontakt.',
     previousStop: 'Forrige stopp',
     previous: 'Forrige',
@@ -30,6 +32,7 @@ export const uiTranslations = {
     technology: 'Teknologi',
     viewCode: 'Se kode på GitHub',
     closeImage: 'Lukk bilde',
+    projectMediaLoading: 'Laster prosjektmedia',
     videoUnavailable: 'Video utilgjengelig',
     demoComing: 'Demo kommer',
     currentProject: 'Du ser den nå',
@@ -48,17 +51,25 @@ export const uiTranslations = {
       'Dette området er klart for en innebygd demo når prosjektet kobles til.',
     caseDescription:
       'Dette prosjektet presenteres som et teknisk case uten en offentlig demo.',
+    gameboyDemoLabel: 'SPILLBAR DEMO',
+    gameboyDemoTitle: 'Start Game Boy-emulatoren',
+    gameboyDemoDescription:
+      'Emulatoren åpnes her i porteføljen. Velg en lovlig .gb-fil fra maskinen din for å spille.',
+    gameboyStart: 'Start emulator',
+    gameboyOpenTab: 'Åpne i egen fane',
+    gameboyFrameTitle: 'Spillbar Game Boy-emulator',
   },
   en: {
     backToTop: 'Back to top',
+    pageTitle: 'Kamil Matyjaszczyk — Software Developer',
     pageDescription:
-      'A portfolio showcasing my skills and projects.',
+      'Portfolio for Kamil Matyjaszczyk, a software developer with projects in frontend, software development, machine learning and emulation.',
     role: 'Software developer',
     availability: 'Available for new opportunities',
     switchLanguage: 'Switch to Norwegian',
     heroEyebrow: 'PORTFOLIO / 2026',
-    heroTitle: 'I build things...',
-    heroTitleAccent: 'Sometimes a little differently',
+    heroTitle: 'I create solutions',
+    heroTitleAccent: 'In a jungle of information',
     heroCopy: 'Swing through work, skills and contact.',
     previousStop: 'Previous stop',
     previous: 'Previous',
@@ -81,6 +92,7 @@ export const uiTranslations = {
     technology: 'Technology',
     viewCode: 'View code on GitHub',
     closeImage: 'Close image',
+    projectMediaLoading: 'Loading project media',
     videoUnavailable: 'Video unavailable',
     demoComing: 'Demo coming',
     currentProject: 'You are viewing it',
@@ -99,5 +111,12 @@ export const uiTranslations = {
       'This area is ready for an embedded demo when the project is connected.',
     caseDescription:
       'This project is presented as a technical case without a public demo.',
+    gameboyDemoLabel: 'PLAYABLE DEMO',
+    gameboyDemoTitle: 'Start the Game Boy emulator',
+    gameboyDemoDescription:
+      'The emulator opens inside the portfolio. Select a legal .gb file from your computer to play.',
+    gameboyStart: 'Start emulator',
+    gameboyOpenTab: 'Open in new tab',
+    gameboyFrameTitle: 'Playable Game Boy emulator',
   },
 }

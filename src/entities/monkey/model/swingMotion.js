@@ -174,7 +174,9 @@ export function updateSwingMotion({
       0.42,
     )
     const idleTarget =
-      -dragOffset * 0.18 + Math.sin(elapsed * 0.7) * 0.018
+      -dragOffset * 0.18 +
+      Math.sin(elapsed * 0.58) * 0.03 +
+      Math.sin(elapsed * 1.17 + 0.7) * 0.009
     idleTheta.current = THREE.MathUtils.damp(
       idleTheta.current,
       idleTarget,
@@ -183,6 +185,8 @@ export function updateSwingMotion({
     )
     theta = idleTheta.current
     setMonkeyPendulumTarget(targetPosition, currentAnchor, theta)
+    targetPosition.y += Math.sin(elapsed * 1.12) * 0.014
+    targetPosition.z += Math.sin(elapsed * 0.67 + 1.4) * 0.008
     monkey.rotation.z = THREE.MathUtils.damp(
       monkey.rotation.z,
       -theta * 0.4,
@@ -207,6 +211,7 @@ export function updateSwingMotion({
     flightAmount,
     theta,
     smoothedVelocity,
+    elapsed,
     delta,
   })
 

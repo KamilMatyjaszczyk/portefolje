@@ -329,6 +329,22 @@
   line-height: 1.7;
 }
 
+.project-demo--loading {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  min-height: 13rem;
+}
+
+.project-demo--loading div {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid rgba(227, 226, 184, 0.16);
+  border-top-color: rgba(211, 183, 96, 0.9);
+  border-radius: 50%;
+  animation: media-loading-spin 900ms linear infinite;
+}
+
 .project-demo--current {
   display: grid;
   place-content: center;
@@ -354,8 +370,21 @@
   border-top: 1px solid rgba(227, 226, 184, 0.14);
 }
 
+.project-description {
+  margin-top: 0.8rem;
+}
+
 .project-detail-copy p {
   margin: 0.8rem 0 0;
+}
+
+.project-description p {
+  margin: 0;
+  max-width: 42rem;
+}
+
+.project-description p + p {
+  margin-top: 0.75rem;
 }
 
 .project-detail-copy ul {
@@ -388,6 +417,12 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes media-loading-spin {
+  to {
+    transform: rotate(1turn);
   }
 }
 
@@ -440,6 +475,78 @@
   height: 100%;
   display: block;
   object-fit: contain;
+}
+
+.project-demo--embed-launcher {
+  display: grid;
+  align-content: center;
+  min-height: 18rem;
+}
+
+.project-demo--embed-launcher strong {
+  margin-top: 1.8rem;
+}
+
+.embed-launcher-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.3rem;
+}
+
+.embed-launcher-actions button,
+.embed-launcher-actions a,
+.embed-toolbar a {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgba(211, 183, 96, 0.28);
+  border-radius: 2rem;
+  color: #f2e2a8;
+  background: rgba(211, 183, 96, 0.1);
+  font: 500 0.6rem 'DM Mono', monospace;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.embed-launcher-actions button:hover,
+.embed-launcher-actions a:hover,
+.embed-toolbar a:hover {
+  border-color: rgba(211, 183, 96, 0.52);
+  background: rgba(211, 183, 96, 0.17);
+}
+
+.project-demo--embed {
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #cbc6b8;
+}
+
+.embed-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.85rem;
+  background: rgba(5, 29, 19, 0.94);
+}
+
+.embed-toolbar a {
+  padding: 0.48rem 0.72rem;
+}
+
+.embed-viewport {
+  height: min(34rem, 58vh);
+  overflow: hidden;
+}
+
+.project-demo--embed iframe {
+  width: 128.21%;
+  height: min(43.6rem, 74.4vh);
+  display: block;
+  border: 0;
+  background: #cbc6b8;
+  transform: scale(0.78);
+  transform-origin: top left;
 }
 
 .project-demo--architecture {

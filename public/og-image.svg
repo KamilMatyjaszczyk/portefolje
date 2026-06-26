@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Kamil Matyjaszczyk — Software Developer</title>
+  <desc id="desc">Portfolio sharing image with a calm jungle-inspired developer aesthetic.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1200" y1="0" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102d23"/>
+      <stop offset=".55" stop-color="#244b32"/>
+      <stop offset="1" stop-color="#0b2119"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(420 0 0 420 865 170)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d7c878" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#d7c878" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="122" x2="990" y1="120" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#132f24" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#071b15" stop-opacity=".78"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#d9cb79"/>
+      <stop offset="1" stop-color="#6e9a5e"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#03110d" flood-opacity=".45"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <path d="M106 0c-7 93 15 152 66 202" fill="none" stroke="#d8c878" stroke-width="5" stroke-linecap="round" opacity=".32"/>
+  <path d="M965-12c2 103-25 172-83 226" fill="none" stroke="#d8c878" stroke-width="5" stroke-linecap="round" opacity=".24"/>
+  <path d="M1045-18c14 114-15 193-90 255" fill="none" stroke="#f2f0d5" stroke-width="3" stroke-linecap="round" opacity=".16"/>
+
+  <g opacity=".28">
+    <circle cx="168" cy="188" r="3" fill="#f2f0d5"/>
+    <circle cx="1022" cy="126" r="4" fill="#d9cb79"/>
+    <circle cx="990" cy="484" r="3" fill="#f2f0d5"/>
+    <circle cx="278" cy="498" r="2.5" fill="#d9cb79"/>
+    <circle cx="752" cy="84" r="2.5" fill="#f2f0d5"/>
+  </g>
+
+  <rect x="92" y="94" width="1016" height="442" rx="42" fill="url(#panel)" stroke="#e3e2b8" stroke-opacity=".16" filter="url(#soft-shadow)"/>
+
+  <g text-anchor="middle">
+    <text x="600" y="286" fill="#f2f0d5" font-family="Inter, Arial, sans-serif" font-size="78" font-weight="760" letter-spacing="-3">Kamil Matyjaszczyk</text>
+    <text x="600" y="360" fill="#d9cb79" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="640" letter-spacing="-1.2">Software Developer</text>
+  </g>
+
+  <path d="M0 568c72-36 148-47 228-32 95 18 183 13 264-14 103-35 218-25 346 31 122 53 242 50 362-8v85H0Z" fill="#071812" opacity=".88"/>
+  <path d="M0 592c150-35 286-32 408 10 126 44 259 34 399-30 109-50 240-44 393 18v40H0Z" fill="#04120e" opacity=".9"/>
+</svg>

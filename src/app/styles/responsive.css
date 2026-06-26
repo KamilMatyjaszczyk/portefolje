@@ -96,6 +96,20 @@
     min-height: 10rem;
   }
 
+  .project-demo--embed-launcher {
+    min-height: 15rem;
+  }
+
+  .embed-viewport {
+    height: 31rem;
+  }
+
+  .project-demo--embed iframe {
+    width: 138.89%;
+    height: 43.06rem;
+    transform: scale(0.72);
+  }
+
   .architecture-heading {
     display: block;
   }

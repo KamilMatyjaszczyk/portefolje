@@ -59,13 +59,20 @@ export function updateBodyRotation({
   flightAmount,
   theta,
   smoothedVelocity,
+  elapsed,
   delta,
 }) {
   if (!isTravelling) {
     monkey.rotation.x = THREE.MathUtils.damp(
       monkey.rotation.x,
-      0,
-      9,
+      0.012 + Math.sin(elapsed * 1.12) * 0.012,
+      6,
+      delta,
+    )
+    monkey.rotation.y = THREE.MathUtils.damp(
+      monkey.rotation.y,
+      Math.sin(elapsed * 0.46 + 0.5) * 0.025,
+      5,
       delta,
     )
     return
@@ -91,6 +98,12 @@ export function updateBodyRotation({
     monkey.rotation.x,
     -0.08 * flightAmount,
     9,
+    delta,
+  )
+  monkey.rotation.y = THREE.MathUtils.damp(
+    monkey.rotation.y,
+    0,
+    8,
     delta,
   )
 }

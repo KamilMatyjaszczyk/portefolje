@@ -25,6 +25,9 @@ coverage
 .vercel
 .netlify
 
+# Local embedded demos
+public/demos/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

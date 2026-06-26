@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback } from 'react'
 import ProjectDetail from '../../../entities/project/ui/ProjectDetail'
 import ProjectGrid from '../../../entities/project/ui/ProjectGrid'
 import { useProjectRoute } from '../../../features/project-routing/model/useProjectRoute'
@@ -21,27 +21,30 @@ function SectionPanel({ activeSection, onClose }) {
     (isProjectRouteOpen && !activeProject)
   const isOpen = Boolean(content || isProjectList || activeProject)
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key !== 'Escape' || !activeProject) return
-      event.stopPropagation()
-      showProjectList()
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeProject, showProjectList])
-
-  const closePanel = () => {
+  const closePanel = useCallback(() => {
     closeProjectRoute()
     onClose()
-  }
+  }, [closeProjectRoute, onClose])
+
+  const handleEscape = useCallback(() => {
+    if (activeProject) {
+      showProjectList()
+    } else {
+      closePanel()
+    }
+  }, [activeProject, closePanel, showProjectList])
 
   return (
     <ModalPanel
       isOpen={isOpen}
       isDetail={Boolean(activeProject)}
       onClose={closePanel}
+      onEscape={handleEscape}
+      focusKey={
+        activeProject?.slug ??
+        activeSection ??
+        (isProjectList ? 'projects' : 'closed')
+      }
     >
       {isOpen &&
         (activeProject ? (

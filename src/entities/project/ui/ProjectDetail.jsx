@@ -5,15 +5,71 @@ function ProjectDetail({ project, onBack }) {
   const { t } = useLanguage()
   const [videoFailed, setVideoFailed] = useState(false)
   const [selectedImage, setSelectedImage] = useState(null)
-  const showVideo = Boolean(project.videoUrl) && !videoFailed
-  const galleryImages =
-    project.architectureImages ?? project.resultImages
+  const [embedStarted, setEmbedStarted] = useState(false)
+  const [media, setMedia] = useState({
+    videoUrl: null,
+    galleryImages: null,
+    isLoading: false,
+    hasError: false,
+  })
+  const embedUrl = project.embedPath
+    ? `${import.meta.env.BASE_URL}${project.embedPath}`
+    : null
+  const showVideo = Boolean(media.videoUrl) && !videoFailed
+  const galleryImages = media.galleryImages
   const showGallery = !showVideo && Boolean(galleryImages?.length)
 
   useEffect(() => {
+    let ignoreResult = false
+    const gallery = getProjectGallery(project)
+    const shouldLoadMedia =
+      Boolean(project.videoLoader) || Boolean(gallery?.length)
+
     setVideoFailed(false)
     setSelectedImage(null)
-  }, [project.slug])
+    setEmbedStarted(false)
+    setMedia({
+      videoUrl: null,
+      galleryImages: null,
+      isLoading: shouldLoadMedia,
+      hasError: false,
+    })
+
+    if (!shouldLoadMedia) return undefined
+
+    async function loadProjectMedia() {
+      try {
+        const [videoUrl, loadedGalleryImages] = await Promise.all([
+          project.videoLoader?.() ?? Promise.resolve(null),
+          loadProjectGallery(gallery),
+        ])
+
+        if (!ignoreResult) {
+          setMedia({
+            videoUrl,
+            galleryImages: loadedGalleryImages,
+            isLoading: false,
+            hasError: false,
+          })
+        }
+      } catch {
+        if (!ignoreResult) {
+          setMedia({
+            videoUrl: null,
+            galleryImages: null,
+            isLoading: false,
+            hasError: true,
+          })
+        }
+      }
+    }
+
+    loadProjectMedia()
+
+    return () => {
+      ignoreResult = true
+    }
+  }, [project])
 
   return (
     <div className="project-detail">
@@ -26,18 +82,26 @@ function ProjectDetail({ project, onBack }) {
       <h2 id="panel-title">{project.title}</h2>
       <p className="panel-intro">{project.summary}</p>
 
-      {showVideo ? (
+      {embedUrl ? (
+        <EmbeddedGameBoyDemo
+          url={embedUrl}
+          started={embedStarted}
+          onStart={() => setEmbedStarted(true)}
+        />
+      ) : media.isLoading ? (
+        <ProjectMediaLoading />
+      ) : showVideo ? (
         <div className="project-demo project-demo--video">
           <video
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             aria-label={`${t('videoPreview')} ${project.title}`}
             onError={() => setVideoFailed(true)}
           >
-            <source src={project.videoUrl} type="video/webm" />
+            <source src={media.videoUrl} type="video/webm" />
             {t('videoUnsupported')}
           </video>
         </div>
@@ -51,14 +115,20 @@ function ProjectDetail({ project, onBack }) {
       ) : (
         <ProjectDemoPlaceholder
           project={project}
-          videoFailed={videoFailed}
+          videoFailed={videoFailed || media.hasError}
         />
       )}
 
       <div className="project-detail-copy">
         <div>
           <span>{t('aboutProject')}</span>
-          <p>{project.description}</p>
+          <div className="project-description">
+            {getDescriptionParagraphs(project.description).map(
+              (paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ),
+            )}
+          </div>
           {project.githubUrl && (
             <a
               className="project-link"
@@ -86,6 +156,92 @@ function ProjectDetail({ project, onBack }) {
           onClose={() => setSelectedImage(null)}
         />
       )}
+    </div>
+  )
+}
+
+function getProjectGallery(project) {
+  return project.architectureImages ?? project.resultImages ?? null
+}
+
+async function loadProjectGallery(images) {
+  if (!images?.length) return null
+
+  return Promise.all(
+    images.map(async (image) => ({
+      ...image,
+      src: image.src ?? (await image.loadSrc()),
+    })),
+  )
+}
+
+function getDescriptionParagraphs(description) {
+  if (Array.isArray(description)) return description
+
+  const sentences = description
+    .split(/(?<=\.)\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+
+  if (sentences.length <= 2) return [description]
+
+  return sentences.reduce((paragraphs, sentence, index) => {
+    const paragraphIndex = Math.floor(index / 2)
+    paragraphs[paragraphIndex] = paragraphs[paragraphIndex]
+      ? `${paragraphs[paragraphIndex]} ${sentence}`
+      : sentence
+    return paragraphs
+  }, [])
+}
+
+function ProjectMediaLoading() {
+  const { t } = useLanguage()
+
+  return (
+    <div className="project-demo project-demo--loading">
+      <span>{t('projectMediaLoading')}</span>
+      <div aria-hidden="true" />
+    </div>
+  )
+}
+
+function EmbeddedGameBoyDemo({ url, started, onStart }) {
+  const { t } = useLanguage()
+
+  if (started) {
+    return (
+      <div className="project-demo project-demo--embed">
+        <div className="embed-toolbar">
+          <span>{t('gameboyDemoLabel')}</span>
+          <a href={url} target="_blank" rel="noreferrer">
+            {t('gameboyOpenTab')} ↗
+          </a>
+        </div>
+        <div className="embed-viewport">
+          <iframe
+            src={url}
+            title={t('gameboyFrameTitle')}
+            sandbox="allow-scripts allow-same-origin allow-downloads allow-modals"
+            allow="fullscreen"
+          />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="project-demo project-demo--embed-launcher">
+      <span>{t('gameboyDemoLabel')}</span>
+      <strong>{t('gameboyDemoTitle')}</strong>
+      <p>{t('gameboyDemoDescription')}</p>
+      <div className="embed-launcher-actions">
+        <button type="button" onClick={onStart}>
+          {t('gameboyStart')} →
+        </button>
+        <a href={url} target="_blank" rel="noreferrer">
+          {t('gameboyOpenTab')} ↗
+        </a>
+      </div>
     </div>
   )
 }

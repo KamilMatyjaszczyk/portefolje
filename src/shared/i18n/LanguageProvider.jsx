@@ -20,13 +20,28 @@ function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(getInitialLanguage)
 
   useEffect(() => {
+    const metadata = uiTranslations[language]
+
     document.documentElement.lang = language === 'no' ? 'nb' : 'en'
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        'content',
-        uiTranslations[language].pageDescription,
-      )
+    document.title = metadata.pageTitle
+    updateMeta('name', 'description', metadata.pageDescription)
+    updateMeta('property', 'og:title', metadata.pageTitle)
+    updateMeta(
+      'property',
+      'og:description',
+      metadata.pageDescription,
+    )
+    updateMeta(
+      'property',
+      'og:locale',
+      language === 'no' ? 'nb_NO' : 'en_US',
+    )
+    updateMeta('name', 'twitter:title', metadata.pageTitle)
+    updateMeta(
+      'name',
+      'twitter:description',
+      metadata.pageDescription,
+    )
 
     try {
       window.localStorage.setItem(STORAGE_KEY, language)
@@ -51,6 +66,12 @@ function LanguageProvider({ children }) {
       {children}
     </LanguageContext.Provider>
   )
+}
+
+function updateMeta(attribute, value, content) {
+  document
+    .querySelector(`meta[${attribute}="${value}"]`)
+    ?.setAttribute('content', content)
 }
 
 export default LanguageProvider
