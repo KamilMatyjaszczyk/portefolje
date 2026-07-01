@@ -3,8 +3,8 @@ export const uiTranslations = {
     backToTop: 'Gå til toppen',
     pageTitle: 'Kamil Matyjaszczyk — Software Developer',
     pageDescription:
-      'Portefølje for Kamil Matyjaszczyk, software developer med prosjekter innen frontend, systemutvikling, maskinlæring og emulering.',
-    role: 'Software developer',
+      'Portefølje for Kamil Matyjaszczyk, Software Developer med fokus på praktiske, brukervennlige løsninger som er enkle å forstå og videreutvikle.',
+    role: 'Software Developer',
     availability: 'Tilgjengelig for nye muligheter',
     switchLanguage: 'Bytt til engelsk',
     heroEyebrow: 'PORTFOLIO / 2026',
@@ -20,7 +20,7 @@ export const uiTranslations = {
     selectedWork: 'UTVALGT ARBEID',
     projectsTitle: 'Prosjekter jeg har bygget.',
     projectsIntro:
-      'Et lite utvalg arbeid innen frontend, systemutvikling og interaksjonsdesign.',
+      'Et lite utvalg arbeid med praktiske løsninger, teknisk utforsking og interaksjonsdesign.',
     viewProject: 'Se prosjekt',
     closePanel: 'Lukk panel',
     backToProjects: 'Tilbake til prosjekter',
@@ -63,8 +63,8 @@ export const uiTranslations = {
     backToTop: 'Back to top',
     pageTitle: 'Kamil Matyjaszczyk — Software Developer',
     pageDescription:
-      'Portfolio for Kamil Matyjaszczyk, a software developer with projects in frontend, software development, machine learning and emulation.',
-    role: 'Software developer',
+      'Portfolio for Kamil Matyjaszczyk, a Software Developer focused on practical, user-friendly solutions that are easy to understand and build on.',
+    role: 'Software Developer',
     availability: 'Available for new opportunities',
     switchLanguage: 'Switch to Norwegian',
     heroEyebrow: 'PORTFOLIO / 2026',
@@ -80,7 +80,7 @@ export const uiTranslations = {
     selectedWork: 'SELECTED WORK',
     projectsTitle: 'Projects I have built.',
     projectsIntro:
-      'A small selection of work within frontend, software development and interaction design.',
+      'A small selection of work with practical solutions, technical exploration and interaction design.',
     viewProject: 'View project',
     closePanel: 'Close panel',
     backToProjects: 'Back to projects',

@@ -100,6 +100,7 @@
 }
 
 .brand,
+.status-wrap,
 .status-pill,
 .language-toggle {
   pointer-events: auto;
@@ -147,6 +148,10 @@
   font-size: 0.62rem;
 }
 
+.status-wrap {
+  position: relative;
+}
+
 .status-pill {
   display: flex;
   align-items: center;
@@ -160,14 +165,62 @@
   font: 400 0.62rem 'DM Mono', monospace;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  cursor: pointer;
 }
 
-.status-pill span {
+.status-dot {
   width: 0.42rem;
   height: 0.42rem;
+  flex: 0 0 auto;
   border-radius: 50%;
   background: #a8db72;
   box-shadow: 0 0 0.7rem #9fd76b;
+}
+
+.status-popover {
+  position: absolute;
+  z-index: 12;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  width: max-content;
+  max-width: 18rem;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid rgba(230, 236, 195, 0.18);
+  border-radius: 0.85rem;
+  color: rgba(244, 242, 215, 0.86);
+  background: rgba(9, 31, 23, 0.86);
+  box-shadow: 0 1rem 2.4rem rgba(2, 12, 8, 0.28);
+  backdrop-filter: blur(14px);
+  font: 400 0.62rem 'DM Mono', monospace;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0;
+  transform: translateY(-0.35rem) scale(0.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.status-popover::before {
+  content: '';
+  position: absolute;
+  top: -0.32rem;
+  right: 0.85rem;
+  width: 0.58rem;
+  height: 0.58rem;
+  border-top: 1px solid rgba(230, 236, 195, 0.18);
+  border-left: 1px solid rgba(230, 236, 195, 0.18);
+  background: rgba(9, 31, 23, 0.86);
+  transform: rotate(45deg);
+}
+
+.status-wrap.is-open .status-popover {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .header-actions {
@@ -262,7 +315,7 @@
   position: absolute;
   z-index: 4;
   left: 50%;
-  bottom: 15%;
+  bottom: 6.15rem;
   margin: 0;
   transform: translateX(-50%);
   color: rgba(235, 236, 203, 0.38);

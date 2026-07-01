@@ -1,11 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getProjectBySlug } from '../../../entities/project/data/projects.data'
-
-const PROJECT_PATH_PATTERN = /^\/projects\/([^/]+)\/?$/
+import {
+  addRouteChangeListener,
+  getProjectPath,
+  getProjectSlugFromPath,
+  isProjectsPath,
+  navigateToPath,
+} from '../../../shared/routing/routes'
 
 function readProjectRoute(language) {
-  const match = window.location.pathname.match(PROJECT_PATH_PATTERN)
-  return match ? getProjectBySlug(match[1], language) : null
+  const slug = getProjectSlugFromPath(window.location.pathname)
+  return slug ? getProjectBySlug(slug, language) : null
 }
 
 export function useProjectRoute(language) {
@@ -13,45 +18,36 @@ export function useProjectRoute(language) {
     readProjectRoute(language),
   )
   const [isProjectRouteOpen, setIsProjectRouteOpen] = useState(() =>
-    window.location.pathname.startsWith('/projects'),
+    isProjectsPath(window.location.pathname),
   )
 
   useEffect(() => {
     const syncRoute = () => {
       setActiveProject(readProjectRoute(language))
-      setIsProjectRouteOpen(
-        window.location.pathname.startsWith('/projects'),
-      )
+      setIsProjectRouteOpen(isProjectsPath(window.location.pathname))
     }
 
-    window.addEventListener('popstate', syncRoute)
-    return () => window.removeEventListener('popstate', syncRoute)
+    return addRouteChangeListener(syncRoute)
   }, [language])
 
   useEffect(() => {
     setActiveProject(readProjectRoute(language))
+    setIsProjectRouteOpen(isProjectsPath(window.location.pathname))
   }, [language])
 
   const openProject = useCallback((project) => {
-    window.history.pushState(
-      { project: project.slug },
-      '',
-      `/projects/${project.slug}`,
-    )
+    navigateToPath(getProjectPath(project.slug), { project: project.slug })
     setActiveProject(project)
     setIsProjectRouteOpen(true)
   }, [])
 
   const showProjectList = useCallback(() => {
-    window.history.replaceState({}, '', '/projects')
+    navigateToPath('/prosjekter', { section: 'projects' })
     setActiveProject(null)
     setIsProjectRouteOpen(true)
   }, [])
 
   const closeProjectRoute = useCallback(() => {
-    if (window.location.pathname.startsWith('/projects')) {
-      window.history.replaceState({}, '', '/')
-    }
     setActiveProject(null)
     setIsProjectRouteOpen(false)
   }, [])

@@ -28,7 +28,7 @@
   pointer-events: none;
 }
 
-.edge-zone span {
+.edge-arrow {
   display: grid;
   place-items: center;
   width: 2.15rem;
@@ -39,6 +39,22 @@
   color: rgba(245, 225, 163, 0.8);
   background: rgba(12, 41, 29, 0.3);
   backdrop-filter: blur(8px);
+}
+
+.edge-arrow::before {
+  content: '';
+  width: 0.54rem;
+  height: 0.54rem;
+  border-top: 1.5px solid currentColor;
+  border-left: 1.5px solid currentColor;
+}
+
+.edge-arrow-left::before {
+  transform: translateX(0.12rem) rotate(-45deg);
+}
+
+.edge-arrow-right::before {
+  transform: translateX(-0.12rem) rotate(135deg);
 }
 
 .edge-zone-left {
@@ -80,18 +96,49 @@
   cursor: pointer;
   transition:
     color 180ms ease,
-    filter 180ms ease,
     transform 180ms ease;
+}
+
+.tree-label::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -0.45rem -0.75rem;
+  border-radius: 50%;
+  opacity: 0;
+  background:
+    radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--tree-label-accent) 34%, transparent) 0%,
+      color-mix(in srgb, var(--tree-label-accent) 18%, transparent) 42%,
+      transparent 74%
+    );
+  box-shadow:
+    0 0 0.7rem color-mix(in srgb, var(--tree-label-accent) 28%, transparent),
+    0 0 1.35rem color-mix(in srgb, var(--tree-label-accent) 18%, transparent);
+  pointer-events: none;
+  transition: opacity 180ms ease;
 }
 
 .tree-label:hover,
 .tree-label.is-active {
   color: #fff3c6;
-  filter: drop-shadow(
-    0 0 0.65rem
-      color-mix(in srgb, var(--tree-label-accent) 32%, transparent)
-  );
+  background:
+    radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--tree-label-leaf) 88%, rgba(7, 24, 15, 0.78)) 0%,
+      color-mix(in srgb, var(--tree-label-leaf) 62%, rgba(7, 24, 15, 0.42)) 48%,
+      transparent 76%
+    );
+  text-shadow:
+    0 2px 8px rgba(3, 18, 10, 0.9),
+    0 0 0.65rem color-mix(in srgb, var(--tree-label-accent) 42%, transparent);
   transform: scale(1.04);
+}
+
+.tree-label:hover::before,
+.tree-label.is-active::before {
+  opacity: 1;
 }
 
 .tree-label span {

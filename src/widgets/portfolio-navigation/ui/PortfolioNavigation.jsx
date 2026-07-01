@@ -19,7 +19,7 @@ function PortfolioNavigation({
         disabled={Boolean(journey)}
         aria-label={t('previousStop')}
       >
-        <span>←</span>
+        <span className="edge-arrow edge-arrow-left" aria-hidden="true" />
         {t('previous')}
       </button>
       <button
@@ -30,7 +30,7 @@ function PortfolioNavigation({
         aria-label={t('nextStop')}
       >
         {t('next')}
-        <span>→</span>
+        <span className="edge-arrow edge-arrow-right" aria-hidden="true" />
       </button>
 
       <p className="character-label">{t('interactionHint')}</p>

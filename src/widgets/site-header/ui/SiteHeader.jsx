@@ -1,7 +1,32 @@
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../../shared/i18n/useLanguage'
 
 function SiteHeader({ onOpenAbout }) {
   const { language, toggleLanguage, t } = useLanguage()
+  const [isStatusOpen, setIsStatusOpen] = useState(false)
+  const statusRef = useRef(null)
+
+  useEffect(() => {
+    if (!isStatusOpen) return undefined
+
+    const closeStatus = (event) => {
+      if (!statusRef.current?.contains(event.target)) {
+        setIsStatusOpen(false)
+      }
+    }
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsStatusOpen(false)
+    }
+
+    document.addEventListener('pointerdown', closeStatus)
+    document.addEventListener('keydown', closeOnEscape)
+
+    return () => {
+      document.removeEventListener('pointerdown', closeStatus)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [isStatusOpen])
 
   return (
     <header className="site-header">
@@ -20,9 +45,29 @@ function SiteHeader({ onOpenAbout }) {
         </span>
       </button>
       <div className="header-actions">
-        <div className="status-pill">
-          <span />
-          {t('availability')}
+        <div
+          ref={statusRef}
+          className={`status-wrap ${isStatusOpen ? 'is-open' : ''}`}
+        >
+          <button
+            className="status-pill"
+            type="button"
+            onClick={() => setIsStatusOpen((isOpen) => !isOpen)}
+            aria-expanded={isStatusOpen}
+            aria-controls="availability-status"
+            aria-label={t('availability')}
+          >
+            <span className="status-dot" aria-hidden="true" />
+            <span className="status-text">{t('availability')}</span>
+          </button>
+          <div
+            id="availability-status"
+            className="status-popover"
+            role="status"
+            aria-hidden={!isStatusOpen}
+          >
+            {t('availability')}
+          </div>
         </div>
         <button
           className="language-toggle"

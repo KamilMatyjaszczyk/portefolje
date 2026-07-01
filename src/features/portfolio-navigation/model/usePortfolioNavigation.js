@@ -1,9 +1,28 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  addRouteChangeListener,
+  getSectionFromPath,
+  getSectionPath,
+  navigateToPath,
+} from '../../../shared/routing/routes'
 
-export function usePortfolioNavigation(sectionCount) {
-  const [activeSection, setActiveSection] = useState(null)
-  const [currentStop, setCurrentStop] = useState(0)
-  const [journeyStep, setJourneyStep] = useState(0)
+function getSectionIndex(sections, sectionId) {
+  return sections.findIndex((section) => section.id === sectionId)
+}
+
+function readActiveSection() {
+  return getSectionFromPath(window.location.pathname)
+}
+
+export function usePortfolioNavigation(sections) {
+  const sectionCount = sections.length
+  const [activeSection, setActiveSection] = useState(readActiveSection)
+  const initialStop = Math.max(
+    0,
+    getSectionIndex(sections, readActiveSection()),
+  )
+  const [currentStop, setCurrentStop] = useState(initialStop)
+  const [journeyStep, setJourneyStep] = useState(initialStop)
   const [journey, setJourney] = useState(null)
   const [dragOffset, setDragOffset] = useState(0)
 
@@ -17,11 +36,42 @@ export function usePortfolioNavigation(sectionCount) {
     offset: 0,
   })
 
-  const openSection = useCallback((section) => {
-    setActiveSection(section)
-  }, [])
+  const syncRoute = useCallback(() => {
+    const routeSection = readActiveSection()
+
+    setActiveSection(routeSection)
+
+    if (!routeSection) return
+
+    const routeStop = getSectionIndex(sections, routeSection)
+    if (routeStop < 0) return
+
+    setCurrentStop(routeStop)
+    setJourneyStep(routeStop)
+    setJourney(null)
+    setDragOffset(0)
+  }, [sections])
+
+  const openSection = useCallback(
+    (section) => {
+      const nextStop = getSectionIndex(sections, section)
+
+      navigateToPath(getSectionPath(section), { section })
+      setActiveSection(section)
+
+      if (nextStop >= 0) {
+        setCurrentStop(nextStop)
+        setJourneyStep(nextStop)
+      }
+    },
+    [sections],
+  )
 
   const closeSection = useCallback(() => {
+    if (window.location.pathname !== '/') {
+      navigateToPath('/', { section: null })
+    }
+
     setActiveSection(null)
   }, [])
 
@@ -87,6 +137,9 @@ export function usePortfolioNavigation(sectionCount) {
       }
 
       if (activeJourney.openOnArrival) {
+        navigateToPath(getSectionPath(activeJourney.openOnArrival), {
+          section: activeJourney.openOnArrival,
+        })
         setActiveSection(activeJourney.openOnArrival)
       }
 
@@ -109,6 +162,12 @@ export function usePortfolioNavigation(sectionCount) {
     },
     [],
   )
+
+  useEffect(() => addRouteChangeListener(syncRoute), [syncRoute])
+
+  useEffect(() => {
+    syncRoute()
+  }, [syncRoute])
 
   useEffect(() => {
     const handleKeyDown = (event) => {

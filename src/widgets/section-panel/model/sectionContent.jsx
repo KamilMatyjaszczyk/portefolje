@@ -3,7 +3,7 @@ const norwegianContent = {
     eyebrow: 'OM MEG',
     title: 'Hei, jeg er Kamil.',
     intro:
-      'Programvareutviklingsstudent med interesse for sikre, robuste og innovative løsninger som gjør komplekse prosesser enklere å forstå og bruke.',
+      'Programvareutviklingsstudent med interesse for å bygge løsninger som er enkle å forstå, bruke og videreutvikle.',
     body: (
       <>
         <p>
@@ -51,14 +51,14 @@ const norwegianContent = {
               badge: 'Kommende masterprosjekt',
               title: 'Masterstudent',
               organization: 'Odfjell Technology',
-              period: 'Aug. 2026–Mai 2027',
+              period: 'august 2026–mai 2027',
               description:
                 'AI-Driven Integrity Management in Offshore Engineering',
             },
             {
               title: 'Bachelorstudent',
               organization: 'CanEat',
-              period: 'Jan. 2025–Mai 2025',
+              period: 'januar 2025–mai 2025',
               description:
                 'Bidro med å utvikle og implementere en automatisert løsning som forbedret datakvalitet og effektiviserte arbeidsprosesser med redusert behov for manuell behandling.',
             },
@@ -96,7 +96,7 @@ const norwegianContent = {
         <div>
           <span>Data og AI</span>
           <p>
-            Maskinlæring, NLP, Multiagentsystemer, TensorFlow, Pytorch,
+            Maskinlæring, NLP, Multiagentsystemer, TensorFlow, PyTorch,
             Scikit-learn, NumPy
           </p>
         </div>
@@ -110,14 +110,9 @@ const norwegianContent = {
   contact: {
     eyebrow: 'KONTAKT',
     title: 'Sving innom mine kanaler.',
-    intro:
-      'Jeg er åpen for nye muligheter, samarbeid og utviklerroller. Ta gjerne kontakt direkte, eller følg sporene videre til GitHub og LinkedIn.',
+    intro: 'Åpen for nye muligheter, samarbeid og utviklerroller.',
     body: (
-      <ContactLinks
-        emailLabel="E-post"
-        githubLabel="Se kode og prosjekter"
-        linkedinLabel="Koble med meg"
-      />
+      <ContactLinks emailLabel="E-post" />
     ),
   },
 }
@@ -127,7 +122,7 @@ const englishContent = {
     eyebrow: 'ABOUT',
     title: "Hi, I'm Kamil.",
     intro:
-      'Software development student with an interest in secure, robust and innovative solutions that make complex processes easier to understand and use.',
+      'Software development student interested in building solutions that are easy to understand, use and improve.',
     body: (
       <>
         <p>
@@ -176,14 +171,14 @@ const englishContent = {
               badge: "Upcoming master's project",
               title: "Master's student",
               organization: 'Odfjell Technology',
-              period: 'Aug. 2026–May 2027',
+              period: 'August 2026–May 2027',
               description:
                 'AI-Driven Integrity Management in Offshore Engineering',
             },
             {
               title: "Bachelor's student",
               organization: 'CanEat',
-              period: 'Jan. 2025–May 2025',
+              period: 'January 2025–May 2025',
               description:
                 'Contributed to developing and implementing an automated solution that improved data quality and streamlined work processes with a reduced need for manual processing.',
             },
@@ -201,9 +196,9 @@ const englishContent = {
   },
   skills: {
     eyebrow: 'SKILLS',
-    title: 'Technology chosen according to the problem.',
+    title: 'Technology chosen for the problem.',
     intro:
-      'I work broadly with software development, data and web technology, and like to use tools that provide practical value in the solution.',
+      'I work across software development, data and web technology, and prefer tools that add practical value to the solution.',
     body: (
       <div className="skills-list">
         <div>
@@ -222,7 +217,7 @@ const englishContent = {
           <span>Data and AI</span>
           <p>
             Machine learning, NLP, Multi-agent systems, TensorFlow,
-            Pytorch, Scikit-learn, NumPy
+            PyTorch, Scikit-learn, NumPy
           </p>
         </div>
         <div>
@@ -235,15 +230,8 @@ const englishContent = {
   contact: {
     eyebrow: 'CONTACT',
     title: 'Swing by my channels.',
-    intro:
-      'I am open to new opportunities, collaboration and developer roles. Feel free to contact me directly, or follow the trails onward to GitHub and LinkedIn.',
-    body: (
-      <ContactLinks
-        emailLabel="Email"
-        githubLabel="View code and projects"
-        linkedinLabel="Connect with me"
-      />
-    ),
+    intro: 'Open to new opportunities, collaboration and developer roles.',
+    body: <ContactLinks emailLabel="Email" />,
   },
 }
 
@@ -291,13 +279,12 @@ function TimelineSection({ title, items }) {
   )
 }
 
-function ContactLinks({ emailLabel, githubLabel, linkedinLabel }) {
+function ContactLinks({ emailLabel }) {
   return (
     <div className="contact-links">
       <a href="mailto:kamilmaty@hotmail.com">
         <span>{emailLabel}</span>
-        kamilmaty@hotmail.com
-        <b>↗</b>
+        <b>kamilmaty@hotmail.com</b>
       </a>
       <a
         href="https://github.com/KamilMatyjaszczyk/"
@@ -305,7 +292,6 @@ function ContactLinks({ emailLabel, githubLabel, linkedinLabel }) {
         rel="noreferrer"
       >
         <span>GitHub</span>
-        {githubLabel}
         <b>↗</b>
       </a>
       <a
@@ -314,7 +300,6 @@ function ContactLinks({ emailLabel, githubLabel, linkedinLabel }) {
         rel="noreferrer"
       >
         <span>LinkedIn</span>
-        {linkedinLabel}
         <b>↗</b>
       </a>
     </div>
