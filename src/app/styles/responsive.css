@@ -248,13 +248,9 @@
     gap: 0.25rem;
   }
 
-  .contact-links {
-    grid-template-columns: 1fr;
-  }
-
   .contact-links a {
-    min-height: 3.5rem;
-    padding: 0.9rem;
+    min-height: 4rem;
+    padding: 0.9rem 1rem;
     font-size: 0.68rem;
   }
 }

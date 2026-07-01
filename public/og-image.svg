@@ -1,56 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Kamil Matyjaszczyk — Software Developer</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
+  <title id="title">Kamil Matyjaszczyk - Software Developer</title>
   <desc id="desc">Social preview image for Kamil Matyjaszczyk's software developer portfolio.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" x2="1200" y1="0" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0a2018"/>
-      <stop offset=".48" stop-color="#1f4930"/>
-      <stop offset="1" stop-color="#061611"/>
+    <linearGradient id="bg" x1="0" x2="1200" y1="0" y2="627" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061611"/>
+      <stop offset=".46" stop-color="#214e34"/>
+      <stop offset="1" stop-color="#071410"/>
     </linearGradient>
-    <radialGradient id="sun" cx="0" cy="0" r="1" gradientTransform="matrix(360 0 0 360 800 112)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f0d986" stop-opacity=".42"/>
-      <stop offset=".62" stop-color="#c7b668" stop-opacity=".14"/>
-      <stop offset="1" stop-color="#c7b668" stop-opacity="0"/>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(430 0 0 330 760 116)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#efe08f" stop-opacity=".48"/>
+      <stop offset=".58" stop-color="#c9b866" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#c9b866" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="card" x1="176" x2="1030" y1="108" y2="542" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#173a29" stop-opacity=".96"/>
-      <stop offset="1" stop-color="#081c15" stop-opacity=".93"/>
+    <linearGradient id="panel" x1="92" x2="1108" y1="84" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19442e"/>
+      <stop offset="1" stop-color="#071b14"/>
     </linearGradient>
-    <linearGradient id="accent" x1="268" x2="944" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f2e8ae"/>
-      <stop offset=".52" stop-color="#cdb662"/>
-      <stop offset="1" stop-color="#8fc07d"/>
+    <linearGradient id="accent" x1="308" x2="892" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4e7a5"/>
+      <stop offset=".58" stop-color="#d0b95f"/>
+      <stop offset="1" stop-color="#95c985"/>
     </linearGradient>
     <filter id="shadow" x="-10%" y="-12%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#020b08" flood-opacity=".52"/>
+      <feDropShadow dx="0" dy="30" stdDeviation="28" flood-color="#020b08" flood-opacity=".58"/>
     </filter>
   </defs>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#sun)"/>
+  <rect width="1200" height="627" fill="url(#bg)"/>
+  <rect width="1200" height="627" fill="url(#glow)"/>
 
-  <g opacity=".3" fill="#071811">
-    <ellipse cx="110" cy="70" rx="172" ry="96"/>
-    <ellipse cx="316" cy="36" rx="168" ry="92"/>
-    <ellipse cx="932" cy="58" rx="194" ry="102"/>
-    <ellipse cx="1114" cy="92" rx="156" ry="86"/>
+  <g opacity=".34" fill="#04110d">
+    <ellipse cx="94" cy="64" rx="206" ry="116"/>
+    <ellipse cx="342" cy="28" rx="196" ry="98"/>
+    <ellipse cx="948" cy="56" rx="226" ry="112"/>
+    <ellipse cx="1158" cy="88" rx="176" ry="92"/>
   </g>
 
-  <g opacity=".24" fill="none" stroke-linecap="round">
-    <path d="M94-18c-8 92 16 168 74 230" stroke="#f2e8ae" stroke-width="5"/>
-    <path d="M1018-20c12 110-18 188-92 252" stroke="#d4bd66" stroke-width="5"/>
-    <path d="M1094-18c24 126-18 216-126 284" stroke="#f2f0d5" stroke-width="3"/>
+  <g opacity=".18" fill="none" stroke-linecap="round">
+    <path d="M102-24c-10 106 20 184 90 248" stroke="#f2e8ae" stroke-width="7"/>
+    <path d="M1036-28c10 124-28 210-114 278" stroke="#d4bd66" stroke-width="7"/>
   </g>
 
-  <rect x="96" y="86" width="1008" height="458" rx="42" fill="url(#card)" stroke="#f2e8ae" stroke-opacity=".16" filter="url(#shadow)"/>
+  <rect x="78" y="82" width="1044" height="454" rx="44" fill="url(#panel)" stroke="#f2e8ae" stroke-opacity=".18" filter="url(#shadow)"/>
 
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="600" y="168" fill="#d2bc65" font-size="25" font-weight="700" text-anchor="middle" letter-spacing="8">PORTFOLIO / 2026</text>
-    <text x="600" y="286" fill="#f5f1d6" font-size="82" font-weight="700" text-anchor="middle">Kamil Matyjaszczyk</text>
-    <text x="600" y="360" fill="url(#accent)" font-size="48" font-weight="700" text-anchor="middle">Software Developer</text>
-    <text x="600" y="430" fill="#d9dbc0" fill-opacity=".78" font-size="27" font-weight="500" text-anchor="middle">Løsninger som er enkle å forstå, bruke og videreutvikle</text>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <text x="600" y="266" fill="#f7f2d8" font-size="110" font-weight="800" letter-spacing="-2">Kamil</text>
+    <text x="600" y="374" fill="#f7f2d8" font-size="96" font-weight="800" letter-spacing="-2">Matyjaszczyk</text>
+    <text x="600" y="462" fill="url(#accent)" font-size="60" font-weight="800">Software Developer</text>
   </g>
 
-  <path d="M0 568c74-38 150-48 228-32 96 19 185 14 267-14 104-35 218-24 343 31 122 54 242 51 362-8v85H0Z" fill="#071812" opacity=".9"/>
-  <path d="M0 596c150-37 286-34 408 9 128 45 263 34 403-31 108-50 238-44 389 18v38H0Z" fill="#04110d" opacity=".92"/>
+  <path d="M0 572c78-42 164-52 258-31 104 24 196 18 276-20 116-55 244-42 384 40 126 74 220 72 282-6v72H0Z" fill="#061812" opacity=".94"/>
+  <path d="M0 608c164-38 318-33 462 16 142 48 282 36 420-36 114-60 220-55 318 15v24H0Z" fill="#030d0a" opacity=".96"/>
 </svg>
