@@ -1,6 +1,6 @@
 # Jungle Portfolio
 
-Interactive developer portfolio for Kamil Matyjaszczyk, built with React,
+Interactive developer portfolio built with React,
 React Three Fiber and Three.js. Instead of a traditional resume page, the
 project lets the user navigate through a continuous jungle world where a
 monkey swings between the about, projects, skills and contact sections.
@@ -22,7 +22,7 @@ content readable, responsive and accessible.
 
 ## Tech Stack
 
-- React 18
+- React
 - Vite
 - Three.js
 - React Three Fiber
