@@ -10,6 +10,26 @@ function getSectionIndex(sections, sectionId) {
   return sections.findIndex((section) => section.id === sectionId)
 }
 
+function getNearestJourneyStep(currentStep, sectionIndex, sectionCount) {
+  if (sectionIndex < 0 || sectionCount <= 0) return currentStep
+
+  const currentCycle = Math.round(
+    (currentStep - sectionIndex) / sectionCount,
+  )
+  const candidates = [
+    currentCycle - 1,
+    currentCycle,
+    currentCycle + 1,
+  ].map((cycle) => cycle * sectionCount + sectionIndex)
+
+  return candidates.reduce((nearestStep, candidateStep) =>
+    Math.abs(candidateStep - currentStep) <
+    Math.abs(nearestStep - currentStep)
+      ? candidateStep
+      : nearestStep,
+  )
+}
+
 function readActiveSection() {
   return getSectionFromPath(window.location.pathname)
 }
@@ -26,6 +46,7 @@ export function usePortfolioNavigation(sections) {
   const [journey, setJourney] = useState(null)
   const [dragOffset, setDragOffset] = useState(0)
 
+  const journeyRef = useRef(null)
   const wheelLockedRef = useRef(false)
   const wheelAmountRef = useRef(0)
   const wheelResetRef = useRef(null)
@@ -47,15 +68,20 @@ export function usePortfolioNavigation(sections) {
     if (routeStop < 0) return
 
     setCurrentStop(routeStop)
-    setJourneyStep(routeStop)
+    setJourneyStep((currentStep) =>
+      getNearestJourneyStep(currentStep, routeStop, sectionCount),
+    )
+    journeyRef.current = null
     setJourney(null)
     setDragOffset(0)
-  }, [sections])
+  }, [sectionCount, sections])
 
   const openSection = useCallback(
     (section) => {
       const nextStop = getSectionIndex(sections, section)
 
+      journeyRef.current = null
+      setJourney(null)
       navigateToPath(getSectionPath(section), { section })
       setActiveSection(section)
 
@@ -63,6 +89,7 @@ export function usePortfolioNavigation(sections) {
         setCurrentStop(nextStop)
         setJourneyStep(nextStop)
       }
+      setDragOffset(0)
     },
     [sections],
   )
@@ -83,7 +110,7 @@ export function usePortfolioNavigation(sections) {
       openOnArrival = null,
       stepCount = 1,
     ) => {
-      if (journey || nextStop === currentStop) {
+      if (journeyRef.current || nextStop === currentStop) {
         setDragOffset(0)
         return
       }
@@ -95,7 +122,7 @@ export function usePortfolioNavigation(sections) {
 
       setActiveSection(null)
       setDragOffset(0)
-      setJourney({
+      const nextJourney = {
         direction,
         token: Date.now(),
         from: journeyStep,
@@ -104,47 +131,50 @@ export function usePortfolioNavigation(sections) {
         remainingSteps,
         dragStart,
         openOnArrival,
-      })
+      }
+
+      journeyRef.current = nextJourney
+      setJourney(nextJourney)
     },
-    [currentStop, journey, journeyStep, sectionCount],
+    [currentStop, journeyStep, sectionCount],
   )
 
   const completeJourney = useCallback((token) => {
-    setJourney((activeJourney) => {
-      if (!activeJourney || activeJourney.token !== token) {
-        return activeJourney
+    const activeJourney = journeyRef.current
+
+    if (!activeJourney || activeJourney.token !== token) return
+
+    setCurrentStop(activeJourney.nextStop)
+    setJourneyStep(activeJourney.to)
+
+    if (activeJourney.remainingSteps > 1) {
+      const nextStop =
+        (activeJourney.nextStop + activeJourney.direction + sectionCount) %
+        sectionCount
+      const nextJourney = {
+        ...activeJourney,
+        token: Date.now(),
+        from: activeJourney.to,
+        to: activeJourney.to + activeJourney.direction,
+        nextStop,
+        remainingSteps: activeJourney.remainingSteps - 1,
+        dragStart: 0,
       }
 
-      setCurrentStop(activeJourney.nextStop)
-      setJourneyStep(activeJourney.to)
+      journeyRef.current = nextJourney
+      setJourney(nextJourney)
+      return
+    }
 
-      if (activeJourney.remainingSteps > 1) {
-        const nextStop =
-          (activeJourney.nextStop +
-            activeJourney.direction +
-            sectionCount) %
-          sectionCount
+    journeyRef.current = null
+    setJourney(null)
 
-        return {
-          ...activeJourney,
-          token: Date.now(),
-          from: activeJourney.to,
-          to: activeJourney.to + activeJourney.direction,
-          nextStop,
-          remainingSteps: activeJourney.remainingSteps - 1,
-          dragStart: 0,
-        }
-      }
-
-      if (activeJourney.openOnArrival) {
-        navigateToPath(getSectionPath(activeJourney.openOnArrival), {
-          section: activeJourney.openOnArrival,
-        })
-        setActiveSection(activeJourney.openOnArrival)
-      }
-
-      return null
-    })
+    if (activeJourney.openOnArrival) {
+      navigateToPath(getSectionPath(activeJourney.openOnArrival), {
+        section: activeJourney.openOnArrival,
+      })
+      setActiveSection(activeJourney.openOnArrival)
+    }
   }, [sectionCount])
 
   const travel = useCallback(
