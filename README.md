@@ -1,5 +1,7 @@
 # Jungle Portfolio
 
+[![CI](https://github.com/KamilMatyjaszczyk/portefolje/actions/workflows/ci.yml/badge.svg)](https://github.com/KamilMatyjaszczyk/portefolje/actions/workflows/ci.yml)
+
 Interactive developer portfolio built with React,
 React Three Fiber and Three.js. Instead of a traditional resume page, the
 project lets the user navigate through a continuous jungle world where a
