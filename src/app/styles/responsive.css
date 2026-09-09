@@ -188,10 +188,6 @@
     grid-template-columns: 1fr;
   }
 
-  .project-detail-copy {
-    grid-template-columns: 1fr;
-  }
-
   .project-demo {
     min-height: 10rem;
   }

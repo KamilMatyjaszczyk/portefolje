@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="800" viewBox="0 0 1120 800" role="img" aria-labelledby="title desc">
+  <title id="title">Distributed AI Homelab — planned architecture</title>
+  <desc id="desc">A private Tailscale network connects clients to an always-on Orange Pi agent. MCP adapters call mail, storage and compute services. A node manager wakes the Fedora GPU worker and results return to persistent NAS storage. All integrations shown are planned.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8" fill="none" stroke="#547565" stroke-width="1.5"/></marker>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #193a2b; text-anchor: middle; }
+      .label { font-size: 21px; font-weight: 650; }
+      .detail { font-size: 16px; fill: #496454; }
+      .box { fill: #ffffff; stroke: #9bb6a3; stroke-width: 2; }
+      .line { fill: none; stroke: #547565; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1120" height="800" rx="20" fill="#f4f2e0"/>
+  <text x="560" y="40" class="label">Distributed AI Homelab &amp; MCP Agent</text>
+  <text x="560" y="66" class="detail">PLANNED ARCHITECTURE · IN DEVELOPMENT</text>
+  <rect x="365" y="88" width="390" height="46" rx="12" class="box"/>
+  <text x="560" y="118" class="label">iPhone / Laptop</text>
+  <path d="M560 134V180" class="line"/>
+  <text x="690" y="162" class="detail">Private Tailscale network</text>
+  <rect x="36" y="181" width="1048" height="393" rx="18" fill="#e7eddf" stroke="#9bb6a3" stroke-dasharray="7 5"/>
+  <text x="560" y="216" class="label">Orange Pi 4 Pro · always-on control node</text>
+  <text x="560" y="244" class="detail">ARM64 · Linux · Docker · APIs · authentication · scheduling</text>
+  <rect x="395" y="265" width="330" height="48" rx="10" class="box"/>
+  <text x="560" y="296" class="label">AI agent</text>
+  <path d="M560 313V335H210V355" class="line"/>
+  <path d="M560 313V355" class="line"/>
+  <path d="M560 335H910V355" class="line"/>
+  <rect x="70" y="357" width="280" height="48" rx="10" class="box"/>
+  <rect x="420" y="357" width="280" height="48" rx="10" class="box"/>
+  <rect x="770" y="357" width="280" height="48" rx="10" class="box"/>
+  <text x="210" y="388" class="label">Mail MCP</text>
+  <text x="560" y="388" class="label">Storage MCP</text>
+  <text x="910" y="388" class="label">Compute MCP</text>
+  <path d="M210 405V438" class="line"/>
+  <path d="M560 405V438" class="line"/>
+  <path d="M910 405V438" class="line"/>
+  <rect x="70" y="440" width="280" height="102" rx="10" class="box"/>
+  <rect x="420" y="440" width="280" height="102" rx="10" class="box"/>
+  <rect x="770" y="440" width="280" height="102" rx="10" class="box"/>
+  <text x="210" y="474" class="label">MailService</text>
+  <text x="210" y="504" class="detail">Repository → mail cache</text>
+  <text x="560" y="474" class="label">StorageService</text>
+  <text x="560" y="504" class="detail">Files · metadata · retrieval</text>
+  <text x="910" y="474" class="label">Node manager</text>
+  <text x="910" y="504" class="detail">Job routing · status</text>
+  <path d="M560 542V621" class="line"/>
+  <path d="M910 542V621" class="line"/>
+  <text x="980" y="599" class="detail">Wake-on-LAN</text>
+  <rect x="70" y="624" width="280" height="116" rx="12" class="box"/>
+  <text x="210" y="659" class="label">NVMe</text>
+  <text x="210" y="689" class="detail">OS · containers · PostgreSQL</text>
+  <text x="210" y="715" class="detail">Application state · indexes</text>
+  <rect x="420" y="624" width="280" height="116" rx="12" class="box"/>
+  <text x="560" y="659" class="label">Persistent HDD / NAS</text>
+  <text x="560" y="689" class="detail">Files · datasets · backups</text>
+  <text x="560" y="715" class="detail">ML outputs</text>
+  <rect x="770" y="624" width="280" height="116" rx="12" class="box"/>
+  <text x="910" y="654" class="label">Fedora · RTX 5070 Ti</text>
+  <text x="910" y="682" class="detail">ComputeService · 16 GB VRAM</text>
+  <text x="910" y="710" class="detail">CUDA / PyTorch · LLM / ML</text>
+  <path d="M210 574V621" class="line"/>
+  <path d="M910 740V771H560V743" class="line"/>
+  <text x="735" y="763" class="detail">Save results</text>
+</svg>

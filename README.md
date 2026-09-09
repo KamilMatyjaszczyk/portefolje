@@ -99,7 +99,8 @@ public/
 | `src/entities/monkey/model/swingMotion.js` | Motion logic for the monkey's swinging |
 | `src/features/portfolio-navigation/model/usePortfolioNavigation.js` | Section, drag, scroll and route navigation |
 | `src/widgets/section-panel/model/sectionContent.jsx` | About, skills and contact content in Norwegian/English |
-| `src/entities/project/data/projects.data.js` | Project data, media and links |
+| `src/entities/project/data/projects.data.js` | Project imports, ordering, numbering and language/slug lookup |
+| `src/entities/project/data/<project>.data.js` | Individual project content, translations, media and links |
 | `src/shared/i18n/uiTranslations.js` | UI text and metadata for Norwegian/English |
 
 ## Architecture
@@ -148,11 +149,18 @@ Personal content, section text and contact links are edited in:
 src/widgets/section-panel/model/sectionContent.jsx
 ```
 
-Projects are edited in:
+Each project has its own data file containing `project` (Norwegian content and
+shared fields) and `englishContent` (English overrides), for example:
 
 ```text
-src/entities/project/data/projects.data.js
+src/entities/project/data/mcpmail.data.js
+src/entities/project/data/homelab.data.js
 ```
+
+Import new project files in `src/entities/project/data/projects.data.js` and add
+them to `projectDefinitions` in the desired order. Project numbers are generated
+automatically from that order. Media loaders use the shared `loadAsset.js` helper
+to keep images and videos loaded on demand.
 
 UI text, metadata and language-specific labels are edited in:
 

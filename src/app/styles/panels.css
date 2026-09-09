@@ -46,6 +46,10 @@
   transition: transform var(--transition-panel);
 }
 
+.content-panel.is-project-detail {
+  padding-top: 1.4rem;
+}
+
 .content-panel::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -296,7 +300,11 @@
 }
 
 .project-back {
-  margin: 0 0 2.2rem;
+  display: flex;
+  align-items: center;
+  min-height: 2.7rem;
+  max-width: calc(100% - 3.7rem);
+  margin: 0 0 1rem;
   padding: 0;
   border: 0;
   color: var(--color-accent);
@@ -304,6 +312,7 @@
   font: 400 0.58rem 'DM Mono', monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  text-align: left;
   cursor: pointer;
 }
 
@@ -322,8 +331,7 @@
     rgba(5, 29, 19, 0.36);
 }
 
-.project-demo span,
-.project-detail-copy span {
+.project-demo span {
   color: var(--color-accent);
   font: 400 0.55rem 'DM Mono', monospace;
   letter-spacing: 0.1em;
@@ -378,42 +386,86 @@
 
 .project-detail-copy {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
 }
 
-.project-detail-copy > div {
-  padding: 1.2rem;
+.project-detail-copy > div,
+.project-technologies,
+.project-case-section {
+  min-width: 0;
+  padding: 1.5rem 0;
   border-top: 1px solid rgba(227, 226, 184, 0.14);
 }
 
-.project-description {
-  margin-top: 0.8rem;
+.project-detail-copy h3,
+.project-technologies h3,
+.project-case-section h3 {
+  margin: 0 0 0.85rem;
+  color: #f2f0d5;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
-.project-detail-copy p {
-  margin: 0.8rem 0 0;
+.project-detail > .panel-intro {
+  margin-bottom: 1rem;
 }
 
-.project-description p {
+.project-technologies {
+  padding: 0.75rem 0;
+}
+
+.project-technologies h3 {
+  margin-bottom: 0.5rem;
+}
+
+.project-description p,
+.project-case-section p,
+.project-case-section li {
+  max-width: none;
   margin: 0;
-  max-width: 42rem;
+  color: rgba(239, 240, 211, 0.74);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
-.project-description p + p {
-  margin-top: 0.75rem;
+.project-description {
+  margin-top: 0;
 }
 
-.project-detail-copy ul {
+.project-description p + p,
+.project-case-section p + p,
+.project-case-section li + li {
+  margin-top: 0.85rem;
+}
+
+.project-case-section ul,
+.project-case-section ol {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.project-case-section li {
+  padding-left: 0.35rem;
+}
+
+.project-case-section li::marker {
+  color: var(--color-accent);
+}
+
+.project-technologies ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
-  margin: 0.8rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.project-detail-copy li {
+.project-technologies li {
   padding: 0.35rem 0.55rem;
   border: 1px solid rgba(227, 226, 184, 0.13);
   border-radius: 2rem;

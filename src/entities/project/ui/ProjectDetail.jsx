@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLanguage } from '../../../shared/i18n/useLanguage'
 
 function ProjectDetail({ project, onBack }) {
@@ -82,6 +83,15 @@ function ProjectDetail({ project, onBack }) {
       <h2 id="panel-title">{project.title}</h2>
       <p className="panel-intro">{project.summary}</p>
 
+      <section className="project-technologies">
+        <h3>{t('technology')}</h3>
+        <ul>
+          {project.technologies.map((technology) => (
+            <li key={technology}>{technology}</li>
+          ))}
+        </ul>
+      </section>
+
       {embedUrl ? (
         <EmbeddedGameBoyDemo
           url={embedUrl}
@@ -93,15 +103,17 @@ function ProjectDetail({ project, onBack }) {
       ) : showVideo ? (
         <div className="project-demo project-demo--video">
           <video
+            key={media.videoUrl}
+            src={media.videoUrl}
             autoPlay
             muted
             loop
             playsInline
-            preload="none"
+            controls
+            preload="metadata"
             aria-label={`${t('videoPreview')} ${project.title}`}
             onError={() => setVideoFailed(true)}
           >
-            <source src={media.videoUrl} type="video/webm" />
             {t('videoUnsupported')}
           </video>
         </div>
@@ -121,7 +133,7 @@ function ProjectDetail({ project, onBack }) {
 
       <div className="project-detail-copy">
         <div>
-          <span>{t('aboutProject')}</span>
+          <h3>{t('aboutProject')}</h3>
           <div className="project-description">
             {getDescriptionParagraphs(project.description).map(
               (paragraph) => (
@@ -140,15 +152,25 @@ function ProjectDetail({ project, onBack }) {
             </a>
           )}
         </div>
-        <div>
-          <span>{t('technology')}</span>
-          <ul>
-            {project.technologies.map((technology) => (
-              <li key={technology}>{technology}</li>
-            ))}
-          </ul>
-        </div>
       </div>
+
+      {project.caseStudySections?.map((section) => {
+        const List = section.ordered ? 'ol' : 'ul'
+
+        return (
+          <section className="project-case-section" key={section.title}>
+            <h3>{section.title}</h3>
+            {section.paragraphs?.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.items?.length > 0 && (
+              <List>
+                {section.items.map((item) => <li key={item}>{item}</li>)}
+              </List>
+            )}
+          </section>
+        )
+      })}
 
       {selectedImage && (
         <ImageLightbox
@@ -278,8 +300,36 @@ function ProjectImageGallery({
 
 function ImageLightbox({ image, onClose }) {
   const { t } = useLanguage()
+  const closeButtonRef = useRef(null)
 
-  return (
+  useEffect(() => {
+    const returnFocus = document.activeElement
+    const projectPanel = document.querySelector('.content-panel')
+    const wasInert = projectPanel?.inert
+
+    closeButtonRef.current?.focus({ preventScroll: true })
+    if (projectPanel) projectPanel.inert = true
+
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape' && event.key !== 'Tab') return
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      if (event.key === 'Escape') onClose()
+      else closeButtonRef.current?.focus({ preventScroll: true })
+    }
+
+    window.addEventListener('keydown', handleKeyDown, true)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown, true)
+      if (projectPanel) projectPanel.inert = wasInert
+      if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true })
+    }
+  }, [onClose])
+
+  return createPortal(
     <div
       className="architecture-lightbox"
       role="dialog"
@@ -289,14 +339,20 @@ function ImageLightbox({ image, onClose }) {
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <button type="button" onClick={onClose} aria-label={t('closeImage')}>
+      <button
+        ref={closeButtonRef}
+        type="button"
+        onClick={onClose}
+        aria-label={t('closeImage')}
+      >
         ×
       </button>
       <figure>
         <img src={image.src} alt={image.alt} />
         <figcaption>{image.title}</figcaption>
       </figure>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
