@@ -1,0 +1,129 @@
+.not-found-page {
+  cursor: default;
+  user-select: text;
+  overflow-y: auto;
+  min-height: 42rem;
+}
+
+.lost-trail-copy {
+  position: relative;
+  z-index: 3;
+  width: min(37rem, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding-top: clamp(6.8rem, 14vh, 10rem);
+  text-align: center;
+}
+
+.lost-trail-copy .eyebrow {
+  margin-bottom: 1.2rem;
+}
+
+.lost-trail-copy h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+
+.lost-trail-copy h1 span {
+  display: block;
+  color: #c5c9a0;
+  font-style: italic;
+}
+
+.lost-trail-description {
+  max-width: 26rem;
+  margin: 1.1rem auto 1.5rem;
+  color: #bac5aa;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+.lost-trail-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid #baa15c;
+  border-radius: 2rem;
+  background: #d4bd79;
+  color: #162d21;
+  text-decoration: none;
+  font-size: 0.76rem;
+  font-weight: 600;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.lost-trail-home:hover {
+  background: #e6d294;
+  transform: translateY(-2px);
+}
+
+.lost-trail-home span {
+  font-size: 1.1rem;
+}
+
+.lost-trail-scene {
+  position: absolute;
+  inset: 37% 0 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, #000 20%);
+}
+
+.lost-trail-fallback {
+  padding-top: 7rem;
+  text-align: center;
+  color: #d4bd79;
+  font: 500 6rem 'DM Mono', monospace;
+}
+
+.lost-trail-caption {
+  position: absolute;
+  z-index: 3;
+  bottom: 1.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
+  color: #a4b395;
+  font: 400 0.57rem 'DM Mono', monospace;
+  letter-spacing: 0.09em;
+}
+
+@media (max-width: 600px) {
+  .not-found-page {
+    min-height: 42rem;
+  }
+
+  .lost-trail-copy {
+    padding-top: 7.5rem;
+  }
+
+  .lost-trail-description {
+    max-width: 21rem;
+    font-size: 0.78rem;
+  }
+
+  .lost-trail-scene {
+    inset: 45% -22% 1rem;
+  }
+
+  .lost-trail-caption {
+    bottom: 1.25rem;
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 601px) {
+  .lost-trail-copy {
+    padding-top: 5.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lost-trail-home {
+    transition: none;
+  }
+}

@@ -23,6 +23,7 @@ function MonkeyModel({
   rightLegRef,
   tailRef,
   onClick,
+  interactive = true,
 }) {
   const tailCurve = useMemo(
     () =>
@@ -42,16 +43,16 @@ function MonkeyModel({
       ref={monkeyRef}
       position={[0, -0.5, 1]}
       scale={0.66}
-      onClick={(event) => {
+      onClick={interactive ? (event) => {
         event.stopPropagation()
-        onClick()
-      }}
-      onPointerOver={() => {
+        onClick?.()
+      } : undefined}
+      onPointerOver={interactive ? () => {
         document.body.style.cursor = 'pointer'
-      }}
-      onPointerOut={() => {
+      } : undefined}
+      onPointerOut={interactive ? () => {
         document.body.style.cursor = 'default'
-      }}
+      } : undefined}
     >
       <mesh position={[0, 0.32, 0]} scale={[0.7, 0.9, 0.58]} castShadow>
         <sphereGeometry args={[0.55, 24, 18]} />

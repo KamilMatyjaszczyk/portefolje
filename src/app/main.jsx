@@ -7,6 +7,7 @@ import './styles/shell.css'
 import './styles/navigation.css'
 import './styles/panels.css'
 import './styles/responsive.css'
+import './styles/not-found.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
